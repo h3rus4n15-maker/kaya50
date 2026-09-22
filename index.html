@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAYA50 — 50 Assessment Pertumbuhan Penghasilan</title>
+<meta name="description" content="KAYA50: 20 assessment gratis, dilanjutkan 30 assessment premium untuk memetakan fondasi finansial, kemampuan menghasilkan, bisnis, eksekusi, dan leverage.">
+<style>
+:root{
+  --ink:#0f172a;--muted:#64748b;--white:#fff;
+  --gold:#d4a843;--gold-light:#f5d76e;--gold-dark:#b8923a;
+  --emerald:#0ea5a4;--emerald-light:#5eead4;--emerald-dark:#0d9488;
+  --platinum:#e2e8f0;--slate:#1e293b;--charcoal:#0f172a;
+  --line:rgba(148,163,184,.12);--shadow:0 20px 60px rgba(15,23,42,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  min-height:100vh;background:
+    radial-gradient(circle at 10% 5%,rgba(212,168,67,.12),transparent 26%),
+    radial-gradient(circle at 95% 10%,rgba(14,165,164,.10),transparent 28%),
+    radial-gradient(circle at 75% 95%,rgba(212,168,67,.08),transparent 28%),
+    linear-gradient(135deg,#fefdf8 0%,#f8fafc 50%,#fefdf8 100%);
+}
+button,input{font:inherit}.hidden{display:none!important}button{cursor:pointer}.container{width:min(1080px,92%);margin:auto}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.topbar .inner{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:1000;letter-spacing:.2px}
+.logo{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--emerald));box-shadow:0 10px 26px rgba(212,168,67,.35)}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:999px;background:white;border:1px solid var(--line);font-size:12px;font-weight:900;box-shadow:0 8px 24px rgba(45,55,90,.07)}
+.btn{border:0;border-radius:15px;padding:13px 18px;font-weight:950;transition:.18s transform,.18s box-shadow,.18s opacity;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:hover{transform:translateY(-2px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-primary{color:white;background:linear-gradient(135deg,var(--gold),var(--gold-dark));box-shadow:0 10px 24px rgba(212,168,67,.3)}
+.btn-green{color:white;background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));box-shadow:0 10px 24px rgba(14,165,164,.28)}
+.btn-orange{color:white;background:linear-gradient(135deg,var(--gold),var(--gold-dark));box-shadow:0 10px 24px rgba(212,168,67,.28)}
+.btn-pink{color:white;background:linear-gradient(135deg,var(--gold),var(--emerald))}
+.btn-soft{color:#334155;background:#fff;border:1px solid var(--line)}
+.btn-block{width:100%}
+.card{background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.8);border-radius:28px;box-shadow:var(--shadow)}
+
+/* INTRO */
+.intro{min-height:100vh;display:grid;place-items:center;padding:28px 0 48px}
+.intro-card{overflow:hidden;position:relative}
+.intro-head{padding:34px;color:white;background:linear-gradient(135deg,var(--charcoal) 0%,var(--slate) 50%,var(--gold) 100%);position:relative}
+.intro-head:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-90px;top:-130px;background:rgba(255,255,255,.15)}
+.intro-kicker{font-size:13px;font-weight:950;letter-spacing:1.7px;text-transform:uppercase;opacity:.92}
+.intro h1{font-size:clamp(38px,8vw,72px);line-height:.96;margin:13px 0 14px;letter-spacing:-2px}
+.intro-head p{font-size:17px;line-height:1.7;max-width:780px;margin:0;opacity:.96}
+.truth-box{margin:24px 0 0;padding:19px 20px;border-radius:20px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-size:clamp(17px,3vw,23px);font-weight:1000;line-height:1.35;position:relative;z-index:1}
+.intro-body{padding:26px 30px 30px}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.feature{padding:16px;border-radius:20px;background:#fefdf8;border:1px solid #e2e8f0}.feature b{display:block;margin:6px 0 4px}.feature span{font-size:12px;color:var(--muted);line-height:1.45}
+.intro-note{padding:15px 17px;border-radius:18px;background:#fefce8;border:1px solid #f5d76e;color:#7c5b00;line-height:1.6;font-size:13px;margin-bottom:18px}
+
+/* ASSESSMENT */
+.app-hero{padding:26px 0 14px}.progress-card{padding:18px 20px}.progress-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}.progress-label{font-weight:950}.progress-track{height:14px;background:#e2e8f0;border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--emerald),var(--emerald-light),var(--gold),var(--gold-light));transition:.35s width}
+.stage-message{margin-top:12px;padding:11px 14px;border-radius:15px;background:linear-gradient(90deg,#fefce8,#ecfdf5);border:1px solid #f5d76e;font-weight:800;font-size:13px;color:#475569}
+.assessment-wrap{padding:10px 0 64px}.assessment-card{padding:25px;position:relative;overflow:hidden;transition:.35s background,.35s transform}.assessment-card:before{content:"";position:absolute;inset:0 0 auto 0;height:7px;background:linear-gradient(90deg,var(--gold),var(--emerald),var(--gold-light))}
+.assessment-card.climax1:before{background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--emerald))}
+.assessment-card.climax2:before{height:10px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--emerald),var(--emerald-light),var(--gold))}
+.q-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.category{font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:1px;color:var(--gold)}.q-title{font-size:26px;font-weight:1000;margin:5px 0 0}.q-number{flex:0 0 auto;padding:9px 12px;border-radius:14px;background:var(--charcoal);color:white;font-size:12px;font-weight:950}
+.climax-banner{margin:18px 0 2px;padding:14px 16px;border-radius:18px;font-weight:950;line-height:1.5;background:linear-gradient(135deg,#fefce8,#fef3c7);border:1px solid #f5d76e;color:#7c5b00}
+.question{font-size:clamp(20px,3vw,27px);font-weight:900;line-height:1.35;margin:22px 0 16px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{border:2px solid transparent;text-align:left;padding:16px;border-radius:19px;color:#17223b;font-weight:800;display:flex;gap:12px;align-items:flex-start;transition:.18s transform,.18s box-shadow,.18s border}.option:hover{transform:translateY(-2px)}
+.option:nth-child(1){background:#fef9e7;border-color:#f5d76e}.option:nth-child(2){background:#e6fbf8;border-color:#5eead4}.option:nth-child(3){background:#fef3c7;border-color:#f5d76e}.option:nth-child(4){background:#f0fdfa;border-color:#5eead4}
+.option.selected{border-color:#17223b;box-shadow:0 10px 25px rgba(45,55,90,.13);transform:scale(1.01)}.opt-letter{width:32px;height:32px;flex:0 0 32px;border-radius:11px;display:grid;place-items:center;background:white;box-shadow:0 4px 12px rgba(0,0,0,.07);font-weight:1000}
+.advice{margin-top:22px;padding:24px;border-radius:24px;background:linear-gradient(135deg,#fefce8 0%,#fffbeb 50%,#ecfdf5 100%);border:2px solid #f5d76e;box-shadow:0 8px 24px rgba(212,168,67,.15);animation:adviceIn .35s ease-out}.advice h4{margin:0 0 12px;font-size:20px;font-weight:1000;color:#7c5b00;display:flex;align-items:center;gap:10px}.advice h4::before{content:"💡";font-size:22px}.advice p{margin:0;line-height:1.75;font-size:17px;color:#1e293b}.action-line{margin-top:14px;padding-top:14px;border-top:2px dashed #e8c547;color:#334155;font-weight:900;font-size:15px;line-height:1.6;background:rgba(255,255,255,.6);border-radius:12px;padding:12px 16px;margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}.nav-actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+@keyframes adviceIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESULT */
+.section{padding:28px 0 70px}.section-title{font-size:clamp(32px,5vw,52px);line-height:1.05;margin:0 0 10px}.section-sub{color:var(--muted);line-height:1.7;margin:0 0 22px}.result-hero{padding:28px;background:linear-gradient(135deg,var(--charcoal) 0%,var(--slate) 48%,var(--gold) 100%);color:white;overflow:hidden;position:relative}.result-hero:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-85px;top:-90px;background:rgba(212,168,67,.12)}
+.score-row{display:grid;grid-template-columns:210px 1fr;gap:24px;align-items:center}.score-ring{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) 0deg,rgba(255,255,255,.18) 0deg);position:relative}.score-ring:after{content:"";position:absolute;inset:15px;border-radius:50%;background:var(--charcoal)}.score-ring .inside{position:relative;z-index:2;text-align:center}.score-ring strong{display:block;font-size:48px}.score-ring span{font-size:12px;opacity:.75}.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}.result-card{padding:22px}.result-card h3{margin:0 0 14px}.list{list-style:none;padding:0;margin:0;display:grid;gap:10px}.list li{padding:16px 18px;border-radius:16px;background:#fefdf8;border:1px solid #e2e8f0;line-height:1.65;font-size:15px}.bar-row{margin:13px 0}.bar-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}.bar{height:11px;border-radius:999px;background:#e2e8f0;overflow:hidden}.bar>div{height:100%;background:linear-gradient(90deg,var(--emerald),var(--emerald-light),var(--gold),var(--gold-light))}
+.opportunity{margin-top:16px;padding:24px;border-radius:26px;color:#14311e;background:linear-gradient(135deg,#fefce8,#ecfdf5,#e6fef9);border:1px solid rgba(212,168,67,.22);box-shadow:var(--shadow)}.opportunity h2{margin:0 0 9px;font-size:30px}.opportunity p{line-height:1.65;margin:0}.opportunity .big{font-weight:1000;color:#b8923a}
+
+/* PREMIUM */
+.premium-card{overflow:hidden}.premium-head{padding:30px;background:linear-gradient(135deg,var(--gold) 0%,var(--emerald) 50%,var(--gold-dark) 100%);color:white}.premium-head h1{font-size:clamp(34px,6vw,58px);line-height:1;margin:9px 0}.premium-body{padding:26px}.price{display:inline-block;margin:10px 0 18px;padding:10px 17px;border-radius:16px;background:var(--charcoal);color:white;font-size:28px;font-weight:1000}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 22px}.step{padding:17px;border-radius:20px;border:1px solid #eceef5;background:#fbfcff}.step .num{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--emerald));display:grid;place-items:center;color:white;font-weight:1000;margin-bottom:9px}.step b{display:block;margin-bottom:5px}.step p{margin:0;font-size:12px;color:var(--muted);line-height:1.55}
+.activation-status{padding:13px 15px;border-radius:15px;background:#fefce8;border:1px solid #f5d76e;color:#7c5b00;font-size:13px;font-weight:850;margin:14px 0}.activation-status.ok{background:#ecfdf5;border-color:#5eead4;color:#0d9488}.pass-row{display:grid;grid-template-columns:1fr auto;gap:10px}.pass-row input{min-width:0;padding:14px 15px;border-radius:15px;border:2px solid #e2e8f0;outline:none;background:white}.pass-row input:focus{border-color:var(--gold)}.error{margin-top:10px;color:#b91c1c;font-weight:850;font-size:13px}.success{margin-top:10px;color:#0d9488;font-weight:850;font-size:13px}
+
+/* FINAL / RESELLER */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.plan{padding:18px;border-radius:19px;background:linear-gradient(135deg,#fefdf8,#fff);border:1px solid #e2e8f0}.plan b{display:block;margin-bottom:7px}.plan p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.reseller{margin-top:18px;padding:26px;border-radius:28px;background:linear-gradient(135deg,var(--charcoal) 0%,var(--slate) 48%,var(--gold) 100%);color:white}.money-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.money{padding:15px;border-radius:17px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);text-align:center}.money strong{display:block;font-size:19px}.money span{font-size:12px;opacity:.78}.footer{text-align:center;padding:26px;color:#94a3b8;font-size:12px}
+
+@media(max-width:820px){.feature-grid{grid-template-columns:1fr 1fr}.options,.result-grid,.steps,.plan-grid{grid-template-columns:1fr}.score-row{grid-template-columns:1fr}.score-ring{margin:auto}.money-grid{grid-template-columns:1fr 1fr}.q-title{font-size:22px}.assessment-card{padding:19px}.premium-body,.intro-body{padding:20px}.intro-head{padding:27px}.pass-row{grid-template-columns:1fr}.nav-actions{flex-direction:column-reverse}.nav-actions .btn{width:100%}}
+@media(max-width:480px){.feature-grid,.money-grid{grid-template-columns:1fr}.topbar .pill.hide-mobile{display:none}.intro h1{letter-spacing:-1px}}
+@media print{.topbar,.btn,.premium-card,.opportunity{display:none!important}body{background:white}.card,.result-hero,.reseller{box-shadow:none}.result-hero,.reseller{color:#111;background:white;border:1px solid #ddd}.score-ring:after{background:white}}
+</style>
+</head>
+<body>
+
+<section id="introScreen" class="intro">
+  <div class="container">
+    <div class="card intro-card">
+      <div class="intro-head">
+        <div class="intro-kicker">KAYA50 • Wealth Readiness Journey</div>
+        <h1>Kenali Posisi Anda.<br>Temukan Arah Berikutnya.</h1>
+        <p>Mulai dengan 20 assessment gratis. Setiap jawaban langsung mendapatkan nasihat dan langkah kecil yang bisa dilakukan.</p>
+        <div class="truth-box">💡 JAWABAN JUJUR ANDA AKAN MEMBUAT ASSESSMENT INI MENGANTAR ANDA KE TUJUAN YANG SEBENARNYA.</div>
+      </div>
+      <div class="intro-body">
+        <div class="feature-grid">
+          <div class="feature">🧭<b>20 Gratis</b><span>Mulai tanpa login dan tanpa password.</span></div>
+          <div class="feature">💬<b>Nasihat Instan</b><span>Setiap jawaban mendapatkan respons yang relevan.</span></div>
+          <div class="feature">📊<b>Hasil Sementara</b><span>Lihat pola setelah assessment ke-20.</span></div>
+          <div class="feature">🚀<b>50 Total</b><span>Lanjutkan perjalanan lengkap melalui akses premium.</span></div>
+        </div>
+        <div class="intro-note"><b>Jangan pilih jawaban yang terdengar paling hebat.</b> Pilih yang paling menggambarkan kondisi Anda saat ini. Assessment ini adalah alat refleksi dan edukasi, bukan jaminan kekayaan atau hasil finansial tertentu.</div>
+        <button class="btn btn-primary btn-block" onclick="startJourney()">Mulai 20 Assessment Gratis →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="app" class="hidden">
+  <header class="topbar">
+    <div class="container inner">
+      <div class="brand"><div class="logo">K50</div><div>KAYA50</div></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="pill hide-mobile" id="accessPill">🟢 Akses Gratis 1–20</span>
+        <span class="pill" id="headerProgress">0 / 50</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="assessmentSection">
+      <div class="app-hero">
+        <div class="container">
+          <div class="card progress-card">
+            <div class="progress-top"><span class="progress-label" id="progressLabel">Perjalanan Anda</span><b id="progressPct">0%</b></div>
+            <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+            <div id="stageMessage" class="stage-message">Mulai dari kondisi nyata Anda hari ini.</div>
+          </div>
+        </div>
+      </div>
+      <div class="assessment-wrap">
+        <div class="container">
+          <div class="card assessment-card" id="assessmentCard">
+            <div class="q-head">
+              <div><div class="category" id="category"></div><div class="q-title" id="assessmentTitle"></div></div>
+              <div class="q-number" id="assessmentNumber"></div>
+            </div>
+            <div id="climaxBanner" class="climax-banner hidden"></div>
+            <div id="question" class="question"></div>
+            <div id="options" class="options"></div>
+            <div id="adviceBox" class="advice hidden">
+              <h4>💡 Nasihat untuk jawaban Anda</h4><p id="adviceText"></p><div id="actionText" class="action-line"></div>
+            </div>
+            <div class="nav-actions">
+              <button id="prevBtn" class="btn btn-soft" onclick="prevQuestion()">← Sebelumnya</button>
+              <button id="nextBtn" class="btn btn-primary" onclick="nextQuestion()">Berikutnya →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="interimSection" class="section hidden">
+      <div class="container">
+        <div class="card result-hero">
+          <div class="score-row">
+            <div class="score-ring" id="interimRing"><div class="inside"><strong id="interimScore">0</strong><span>dari 100</span></div></div>
+            <div><div style="font-weight:950;letter-spacing:1.2px;text-transform:uppercase;opacity:.75">Checkpoint 20/50</div><h1 class="section-title" style="margin-top:8px">Hasil Sementara Anda</h1><p id="interimSummary" style="line-height:1.7;margin:0;max-width:700px"></p></div>
+          </div>
+        </div>
+        <div class="result-grid">
+          <div class="card result-card"><h3>📈 Peta 20 Assessment Pertama</h3><div id="interimBars"></div></div>
+          <div class="card result-card"><h3>🎯 Fokus yang Perlu Diperhatikan</h3><ul class="list" id="interimAdvice"></ul></div>
+        </div>
+        <div class="opportunity">
+          <h2>💎 Ada peluang tambahan setelah Anda menyelesaikan KAYA50</h2>
+          <p>Selain mendapatkan hasil lengkap dan action plan, Anda juga akan mendapatkan kesempatan untuk <span class="big">menjual kembali akses aplikasi ini</span>. Karena produknya digital, Anda tidak perlu menambah modal untuk stok atau produksi aplikasi setiap kali ada pembeli baru.</p>
+        </div>
+        <div class="card result-card" style="margin-top:16px;background:linear-gradient(135deg,#fff7ed,#fdf2f8)">
+          <h3 style="font-size:26px">Anda baru membuka 40% perjalanan.</h3>
+          <p class="section-sub">Assessment 21–50 akan masuk lebih dalam ke bisnis & penjualan, disiplin eksekusi, multiple income, aset, leverage teknologi, dan roadmap Rp100 juta pertama.</p>
+          <button class="btn btn-orange btn-block" onclick="showPremium()">🔓 Buka Assessment 21–50 + Hasil Lengkap</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="premiumSection" class="section hidden">
+      <div class="container">
+        <div class="card premium-card">
+          <div class="premium-head">
+            <div style="font-weight:950;letter-spacing:1.4px;text-transform:uppercase">KAYA50 Premium</div>
+            <h1>Lanjutkan Assessment 21–50</h1>
+            <p style="line-height:1.7;margin:0;max-width:760px">Dapatkan 30 assessment lanjutan, hasil akhir lengkap, action plan, dan informasi peluang menjual kembali aplikasi.</p>
+            <div class="price">Rp10.000</div>
+          </div>
+          <div class="premium-body">
+            <h2 style="margin-top:0">Cara mendapatkan akses</h2>
+            <div class="steps">
+              <div class="step"><div class="num">1</div><b>Hubungi Reseller</b><p>Beli license dari reseller via link mereka (contoh: https://abi.aipronusa.com/?ref=R001). Reseller akan memberikan password.</p></div>
+              <div class="step"><div class="num">2</div><b>Masukkan Password</b><p>Masukkan password yang diberikan reseller di kolom di bawah, lalu klik Buka Premium.</p></div>
+            </div>
+            <div style="display:flex;gap:10px;margin-bottom:10px" id="premiumButtons">
+              <a class="btn btn-green" href="https://wa.me/6282247971808?text=Hai%20Abitech%20kirimi%20saya%20passwordnya%20dong" target="_blank" rel="noopener">💬 Hubungi Admin (WA)</a>
+            </div>
+            <div id="resellerInfo" class="hidden" style="margin-bottom:16px;padding:12px;background:#fefce8;border:1px solid #f5d76e;border-radius:12px;">
+              📍 Daftar via Reseller: <b id="resellerName"></b> (WA: <span id="resellerWA"></span>)
+            </div>
+            <div id="activationStatus" class="activation-status">🔒 Kolom password masih terkunci. Hubungi admin terlebih dahulu, dapatkan password, lalu klik Link Aktivasi Website.</div>
+            <div class="pass-row">
+              <input id="premiumPassword" type="password" placeholder="Password dari admin" disabled autocomplete="off">
+              <button id="unlockBtn" class="btn btn-primary" onclick="unlockPremium()" disabled>🔓 Buka Premium</button>
+            </div>
+            <div id="premiumError" class="error hidden"></div>
+            <div id="premiumSuccess" class="success hidden"></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn btn-soft" onclick="showInterim()">← Kembali ke Hasil Sementara</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="finalSection" class="section hidden">
+      <div class="container">
+        <div class="card result-hero">
+          <div class="score-row">
+            <div class="score-ring" id="finalRing"><div class="inside"><strong id="finalScore">0</strong><span>dari 100</span></div></div>
+            <div><div style="font-weight:950;letter-spacing:1.2px;text-transform:uppercase;opacity:.75">50/50 Selesai</div><h1 class="section-title" style="margin-top:8px">Peta KAYA50 Anda</h1><p id="finalSummary" style="line-height:1.7;margin:0;max-width:700px"></p></div>
+          </div>
+        </div>
+        <div class="result-grid">
+          <div class="card result-card"><h3>📊 Skor per Area</h3><div id="finalBars"></div></div>
+          <div class="card result-card"><h3>💪 Kekuatan Utama</h3><ul class="list" id="strengthList"></ul></div>
+          <div class="card result-card"><h3>🎯 Prioritas Perbaikan</h3><ul class="list" id="priorityList"></ul></div>
+          <div class="card result-card"><h3>🧠 Nasihat Besar</h3><ul class="list" id="bigAdvice"></ul></div>
+        </div>
+        <div class="card result-card" style="margin-top:16px"><h3>🚀 Action Plan</h3><div class="plan-grid"><div class="plan"><b>7 Hari</b><p>Rapikan arus kas, pilih satu skill/produk utama, dan tentukan satu aktivitas yang paling dekat dengan transaksi.</p></div><div class="plan"><b>30 Hari</b><p>Bangun ritme penawaran, dokumentasikan hasil, perbaiki offer, dan catat lead, closing, omzet serta margin.</p></div><div class="plan"><b>90 Hari</b><p>Ubah proses yang terbukti menjadi sistem: produk, SOP, database, follow-up, recurring offer, dan reinvestasi terukur.</p></div></div></div>
+        <div class="reseller">
+          <div style="font-weight:950;text-transform:uppercase;letter-spacing:1.3px;color:#b9fbcf">Peluang Produk Digital</div>
+          <h2 style="font-size:32px;margin:8px 0">Jual Kembali Lisensi KAYA50</h2>
+          <p style="line-height:1.7;opacity:.9">Gunakan pengalaman Anda sendiri sebagai bukti demonstrasi. Tawarkan lisensi akses kepada pengguna akhir dan berikan manfaat produk yang sama. Tidak perlu stok fisik; fokus pada distribusi dan pelayanan pembeli.</p>
+          <div class="money-grid"><div class="money"><strong>10 pembeli</strong><span>Rp100.000 omzet</span></div><div class="money"><strong>100 pembeli</strong><span>Rp1.000.000 omzet</span></div><div class="money"><strong>1.000 pembeli</strong><span>Rp10.000.000 omzet</span></div><div class="money"><strong>10.000 pembeli</strong><span>Rp100.000.000 omzet</span></div></div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn btn-green" onclick="copySalesText()">📋 Salin Teks Penjualan</button><button class="btn btn-soft" onclick="window.print()">🖨️ Print / Simpan PDF</button><button class="btn btn-soft" onclick="resetJourney()">↻ Ulangi Assessment</button></div>
+          <p style="font-size:12px;opacity:.65;margin:16px 0 0">Simulasi omzet adalah perhitungan matematika berdasarkan harga Rp10.000 per lisensi, bukan jaminan jumlah penjualan atau penghasilan.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="container">KAYA50 • Alat assessment edukatif dan refleksi. Tidak menjamin kekayaan, pendapatan, atau hasil investasi tertentu.</div></footer>
+</div>
+
+<script>
+// Detect ref dari URL
+const urlRef = new URLSearchParams(window.location.search).get('ref');
+if (urlRef) localStorage.setItem('kaya50_ref', urlRef);
+
+// Fetch reseller info untuk ditampilkan
+async function loadResellerInfo() {
+  const ref = localStorage.getItem('kaya50_ref');
+  if (!ref) return;
+  try {
+    const res = await fetch(`/api/reseller?ref=${ref}`);
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('resellerInfo').classList.remove('hidden');
+      document.getElementById('resellerName').textContent = data.reseller.nama;
+      document.getElementById('resellerWA').textContent = data.reseller.wa;
+    }
+  } catch (e) { console.error(e); }
+}
+loadResellerInfo();
+
+const assessments = [
+  {
+    category:"Fondasi Finansial", title:"Kesadaran Keuangan",
+    q:"Seberapa rutin Anda mencatat pemasukan dan pengeluaran?",
+    options:[
+      ["Tidak pernah",1,"Anda sedang mengambil keputusan finansial tanpa peta. Mulai dari mencatat semua pemasukan dan pengeluaran selama 7 hari.","Aksi hari ini: catat 3 pengeluaran terakhir Anda."],
+      ["Kadang-kadang",2,"Kesadaran sudah ada, tetapi data yang tidak konsisten membuat keputusan mudah bias.","Aksi: tentukan satu waktu tetap setiap malam untuk mencatat."],
+      ["Hampir setiap minggu",3,"Fondasi Anda cukup baik. Naikkan kualitas dengan membagi pengeluaran menjadi kebutuhan, keinginan, dan investasi.","Aksi: buat 3 kategori tersebut sekarang."],
+      ["Setiap hari dan saya evaluasi",4,"Anda sudah memiliki kontrol yang kuat. Gunakan data itu untuk menaikkan rasio tabungan dan investasi secara bertahap.","Aksi: cari satu pos yang bisa dioptimalkan bulan ini."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Kontrol Pengeluaran",
+    q:"Apa yang paling sering terjadi saat Anda menerima penghasilan?",
+    options:[
+      ["Cepat habis tanpa jelas ke mana",1,"Masalah utama bukan hanya jumlah penghasilan, tetapi belum adanya sistem alokasi.","Aksi: bagi penghasilan berikutnya sebelum dibelanjakan."],
+      ["Habis untuk kebutuhan dan cicilan",2,"Cashflow Anda rapuh karena ruang gerak kecil. Prioritaskan efisiensi dan penambahan pendapatan.","Aksi: identifikasi satu cicilan atau biaya yang bisa dikurangi."],
+      ["Masih ada sisa kecil",3,"Anda sudah punya ruang untuk bertumbuh. Jadikan sisa itu alokasi otomatis, bukan kebetulan.","Aksi: tetapkan persentase simpan minimum."],
+      ["Sudah dialokasikan sejak awal",4,"Sistem alokasi adalah kebiasaan bernilai tinggi. Tingkatkan dengan tujuan spesifik untuk setiap pos.","Aksi: beri nama tujuan untuk tabungan/investasi Anda."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Dana Darurat",
+    q:"Jika penghasilan berhenti hari ini, berapa lama kebutuhan pokok Anda masih aman?",
+    options:[
+      ["Kurang dari 1 minggu",1,"Prioritas Anda adalah membangun bantalan kas. Hindari mengambil risiko finansial besar sebelum fondasi membaik.","Aksi: mulai target dana darurat pertama sebesar 1 minggu biaya hidup."],
+      ["1–4 minggu",2,"Anda sudah punya sedikit ruang, tetapi masih rentan terhadap kejadian mendadak.","Aksi: naikkan target menjadi 1 bulan biaya hidup."],
+      ["1–3 bulan",3,"Fondasi cukup baik. Pertahankan sambil terus meningkatkan kapasitas penghasilan.","Aksi: pisahkan rekening dana darurat dari rekening belanja."],
+      ["Lebih dari 3 bulan",4,"Ketahanan Anda relatif kuat. Fokus berikutnya adalah produktivitas aset dan diversifikasi.","Aksi: evaluasi porsi kas yang berlebih agar tetap efisien."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Utang Konsumtif",
+    q:"Bagaimana kondisi utang konsumtif Anda?",
+    options:[
+      ["Sering menambah utang baru",1,"Penambahan utang konsumtif berulang dapat menghambat pertumbuhan aset.","Aksi: hentikan utang baru selama 30 hari dan petakan seluruh kewajiban."],
+      ["Banyak cicilan dan terasa berat",2,"Fokus pada pengurangan tekanan cashflow sebelum mengejar ekspansi agresif.","Aksi: urutkan utang berdasarkan bunga/biaya dan urgensi."],
+      ["Ada, tetapi terkendali",3,"Tetap disiplin agar utang tidak tumbuh lebih cepat dari pendapatan.","Aksi: tetapkan batas maksimum cicilan terhadap penghasilan."],
+      ["Tidak ada / sangat minimal",4,"Ini memberi fleksibilitas yang baik untuk membangun aset.","Aksi: arahkan ruang cashflow ke dana darurat, skill, atau aset produktif."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Kebiasaan Menabung",
+    q:"Berapa besar penghasilan yang biasanya Anda sisihkan?",
+    options:[
+      ["0%",1,"Mulailah dari kebiasaan, bukan nominal besar. Bahkan 2–5% yang konsisten lebih baik daripada menunggu kondisi sempurna.","Aksi: tentukan persentase minimum yang realistis."],
+      ["1–5%",2,"Anda sudah memulai. Tantangan berikutnya adalah meningkatkan persentase tanpa mengganggu kebutuhan pokok.","Aksi: naikkan 1% pada periode berikutnya."],
+      ["6–20%",3,"Kebiasaan Anda cukup sehat. Pastikan dana memiliki tujuan yang jelas.","Aksi: bagi simpanan menjadi darurat, pengembangan diri, dan aset."],
+      [">20%",4,"Disiplin Anda kuat. Fokus pada produktivitas dana dan manajemen risiko.","Aksi: evaluasi apakah terlalu banyak dana hanya mengendap."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Tujuan Finansial",
+    q:"Seberapa jelas target keuangan 12 bulan Anda?",
+    options:[
+      ["Tidak punya target",1,"Tanpa target, keputusan finansial mudah reaktif.","Aksi: tulis satu angka target dan satu alasan mengapa itu penting."],
+      ["Ada di kepala",2,"Target yang hanya diingat mudah berubah. Jadikan tertulis dan terukur.","Aksi: tulis target 12 bulan dengan angka dan tenggat."],
+      ["Tertulis tetapi belum ada rencana",3,"Anda sudah punya arah. Sekarang pecah menjadi target bulanan.","Aksi: bagi target tahunan menjadi 12 target bulanan."],
+      ["Tertulis, terukur, dan ditinjau",4,"Anda memiliki mekanisme eksekusi yang baik.","Aksi: buat review mingguan untuk menjaga ritme."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Kesiapan Investasi",
+    q:"Sebelum berinvestasi, apa yang biasanya Anda lakukan?",
+    options:[
+      ["Ikut rekomendasi orang",1,"Investasi tanpa memahami risiko dapat menghasilkan keputusan yang tidak sesuai kondisi Anda.","Aksi: pelajari tujuan, risiko, likuiditas, dan biaya sebelum membeli."],
+      ["Lihat potensi untung saja",2,"Return tanpa melihat risiko hanya memberi separuh informasi.","Aksi: tulis kemungkinan kerugian terburuk yang dapat Anda tanggung."],
+      ["Bandingkan beberapa pilihan",3,"Pendekatan Anda cukup rasional. Tambahkan kecocokan dengan horizon waktu dan tujuan.","Aksi: cocokkan setiap investasi dengan tujuan spesifik."],
+      ["Punya rencana dan batas risiko",4,"Anda sudah menggunakan prinsip manajemen risiko yang sehat.","Aksi: evaluasi diversifikasi dan biaya secara berkala."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Proteksi Risiko",
+    q:"Bagaimana Anda melindungi keluarga/usaha dari kejadian tak terduga?",
+    options:[
+      ["Belum pernah dipikirkan",1,"Pertumbuhan aset perlu dibarengi perlindungan terhadap risiko besar.","Aksi: daftar tiga risiko finansial terbesar Anda."],
+      ["Mengandalkan tabungan",2,"Tabungan membantu, tetapi risiko besar bisa menghabiskan cadangan cepat.","Aksi: evaluasi kebutuhan proteksi dasar sesuai kondisi Anda."],
+      ["Sudah punya beberapa perlindungan",3,"Fondasi sudah terbentuk. Pastikan manfaatnya benar-benar sesuai kebutuhan.","Aksi: cek kembali nilai pertanggungan dan pengecualian."],
+      ["Punya perlindungan dan review berkala",4,"Pendekatan Anda matang. Jaga agar perlindungan tetap proporsional.","Aksi: lakukan review tahunan."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Aset Produktif",
+    q:"Berapa besar perhatian Anda pada aset yang bisa menghasilkan atau bertumbuh?",
+    options:[
+      ["Belum punya aset produktif",1,"Mulailah dengan aset sederhana: skill, produk digital, alat kerja, atau instrumen yang dipahami.","Aksi: pilih satu aset produktif yang bisa mulai dibangun bulan ini."],
+      ["Baru sedikit",2,"Arah Anda sudah benar. Prioritaskan penambahan aset secara konsisten.","Aksi: alokasikan sebagian tambahan penghasilan untuk aset."],
+      ["Sudah beberapa jenis",3,"Diversifikasi mulai terbentuk. Pastikan tiap aset punya peran yang jelas.","Aksi: ukur kontribusi setiap aset terhadap tujuan."],
+      ["Mayoritas fokus ke aset produktif",4,"Anda sudah berpikir seperti pembangun aset. Fokus pada kualitas, risiko, dan produktivitas.","Aksi: tingkatkan aset dengan rekam jejak terbaik."]
+    ]
+  },
+  {
+    category:"Fondasi Finansial", title:"Rasio Gaya Hidup",
+    q:"Ketika penghasilan naik, apa yang biasanya terjadi pada pengeluaran?",
+    options:[
+      ["Naik lebih cepat",1,"Lifestyle inflation dapat membuat kenaikan penghasilan terasa tidak pernah cukup.","Aksi: tahan kenaikan gaya hidup untuk satu kenaikan pendapatan berikutnya."],
+      ["Naik hampir sama",2,"Sebagian besar kenaikan penghasilan belum berubah menjadi aset.","Aksi: tetapkan minimal 30% dari kenaikan untuk tujuan produktif."],
+      ["Naik sedikit",3,"Anda menjaga ruang untuk pertumbuhan aset.","Aksi: pertahankan aturan alokasi kenaikan pendapatan."],
+      ["Sebagian besar kenaikan masuk aset",4,"Ini kebiasaan yang sangat mendukung akumulasi aset.","Aksi: dokumentasikan aturan ini agar tetap konsisten."]
+    ]
+  },
+
+  {
+    category:"Kemampuan Menghasilkan", title:"Skill yang Bisa Dijual",
+    q:"Berapa banyak skill Anda yang saat ini dapat dijual sebagai jasa/produk?",
+    options:[
+      ["Belum tahu",1,"Anda mungkin memiliki skill, tetapi belum mengemasnya menjadi nilai komersial.","Aksi: tulis 10 hal yang sering orang minta bantuan dari Anda."],
+      ["1 skill",2,"Satu skill cukup untuk memulai. Fokus pada bukti hasil dan penawaran yang jelas.","Aksi: buat satu paket jasa sederhana."],
+      ["2–3 skill",3,"Anda punya fleksibilitas. Hindari menawarkan semuanya sekaligus.","Aksi: pilih skill dengan permintaan dan margin terbaik."],
+      ["Lebih dari 3 dan sudah dimonetisasi",4,"Anda memiliki modal kemampuan yang kuat.","Aksi: ubah skill terbaik menjadi produk/paket yang bisa diulang."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Kemampuan Menjual",
+    q:"Bagaimana perasaan Anda ketika harus menawarkan produk/jasa?",
+    options:[
+      ["Sangat menghindar",1,"Sulit meningkatkan penghasilan jika selalu menghindari percakapan penjualan.","Aksi: latihan menawarkan bantuan, bukan memaksa pembelian."],
+      ["Bisa, tetapi tidak percaya diri",2,"Kepercayaan diri tumbuh dari latihan dan bukti.","Aksi: lakukan 5 percakapan penawaran minggu ini."],
+      ["Cukup nyaman",3,"Kemampuan Anda sudah memadai. Tingkatkan kualitas diagnosis kebutuhan.","Aksi: buat 5 pertanyaan discovery sebelum menawarkan."],
+      ["Sangat nyaman dan terstruktur",4,"Penjualan adalah leverage besar bagi Anda.","Aksi: dokumentasikan skrip terbaik dan ajarkan ke orang lain."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Negosiasi",
+    q:"Saat calon pembeli minta harga turun, apa yang Anda lakukan?",
+    options:[
+      ["Langsung menurunkan harga",1,"Diskon spontan melemahkan margin dan posisi nilai.","Aksi: siapkan opsi paket, bukan hanya potongan harga."],
+      ["Sering bingung",2,"Anda membutuhkan struktur negosiasi sederhana.","Aksi: tentukan harga minimum dan benefit yang bisa ditukar."],
+      ["Tanya alasan lalu tawarkan opsi",3,"Pendekatan ini sehat karena memahami konteks sebelum memberi konsesi.","Aksi: siapkan 3 alternatif paket."],
+      ["Punya aturan negosiasi",4,"Anda sudah menjaga margin dan nilai secara sistematis.","Aksi: ukur pola keberatan untuk memperbaiki offer."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Komunikasi Nilai",
+    q:"Bisakah Anda menjelaskan manfaat produk/jasa dalam 30 detik?",
+    options:[
+      ["Belum bisa",1,"Jika nilai tidak bisa dijelaskan dengan cepat, calon pelanggan mudah kehilangan perhatian.","Aksi: buat kalimat: saya membantu X mendapatkan Y tanpa Z."],
+      ["Bisa tetapi panjang",2,"Pesan Anda perlu dipadatkan.","Aksi: kurangi penjelasan menjadi 1 masalah, 1 hasil, 1 bukti."],
+      ["Cukup jelas",3,"Anda sudah punya fondasi positioning.","Aksi: uji versi pesan pada 5 orang."],
+      ["Sangat jelas dan terbukti",4,"Komunikasi nilai adalah keunggulan Anda.","Aksi: konsisten gunakan pesan yang paling mudah dipahami pasar."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Pemanfaatan AI",
+    q:"Seberapa jauh Anda menggunakan AI untuk meningkatkan produktivitas?",
+    options:[
+      ["Belum menggunakan",1,"AI bisa menjadi pengungkit produktivitas, tetapi mulai dari kebutuhan nyata.","Aksi: pilih satu pekerjaan rutin dan uji bantuan AI."],
+      ["Sesekali",2,"Anda sudah mulai, tetapi belum menjadi sistem.","Aksi: buat satu prompt standar untuk pekerjaan berulang."],
+      ["Sering untuk beberapa pekerjaan",3,"Produktivitas Anda sudah meningkat. Selanjutnya integrasikan workflow.","Aksi: dokumentasikan 3 workflow AI terbaik."],
+      ["Sudah menjadi bagian sistem kerja",4,"Anda memanfaatkan leverage teknologi dengan baik.","Aksi: ukur waktu/biaya yang berhasil dihemat."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Produk Digital",
+    q:"Apakah Anda memiliki produk yang bisa dijual berulang tanpa membuat dari nol setiap kali?",
+    options:[
+      ["Belum",1,"Pendapatan Anda kemungkinan masih terlalu bergantung pada waktu.","Aksi: ubah satu pengetahuan/skill menjadi template, panduan, atau tools."],
+      ["Sedang membuat",2,"Pastikan produk dibuat dari masalah yang benar-benar ada.","Aksi: validasi dengan 10 calon pengguna sebelum menyempurnakan."],
+      ["Sudah ada, penjualan kecil",3,"Produk sudah terbukti ada permintaan.","Aksi: perbaiki distribusi, demo, dan penawaran."],
+      ["Sudah menghasilkan rutin",4,"Anda sudah memiliki aset digital yang skalabel.","Aksi: tambah channel distribusi dan repeat offer."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Personal Brand",
+    q:"Jika orang mencari nama Anda online, apakah keahlian Anda terlihat jelas?",
+    options:[
+      ["Tidak",1,"Tanpa jejak keahlian, pasar sulit mempercayai kemampuan Anda.","Aksi: buat satu halaman profil dan 3 contoh karya."],
+      ["Sedikit",2,"Identitas sudah ada tetapi belum konsisten.","Aksi: pilih satu tema utama untuk 30 hari konten."],
+      ["Cukup jelas",3,"Brand Anda sudah membantu kredibilitas.","Aksi: tambahkan bukti hasil dan testimoni."],
+      ["Sangat jelas dan dipercaya",4,"Kepercayaan publik adalah aset distribusi.","Aksi: ubah perhatian menjadi database dan penawaran."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Jaringan",
+    q:"Seberapa aktif Anda membangun hubungan profesional yang saling memberi nilai?",
+    options:[
+      ["Jarang",1,"Peluang sering datang melalui hubungan, bukan hanya iklan.","Aksi: hubungi 3 orang lama dan tawarkan bantuan relevan."],
+      ["Kadang-kadang",2,"Jaringan perlu ritme, bukan hanya saat butuh.","Aksi: jadwalkan 2 percakapan bermakna per minggu."],
+      ["Rutin",3,"Anda memiliki akses peluang yang baik.","Aksi: petakan siapa yang bisa menjadi partner distribusi."],
+      ["Sistematis dan saling menguntungkan",4,"Jaringan Anda merupakan aset bisnis.","Aksi: buat kolaborasi yang terukur."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Kecepatan Belajar",
+    q:"Ketika muncul skill baru yang penting, bagaimana respons Anda?",
+    options:[
+      ["Menunda lama",1,"Kecepatan adaptasi yang rendah membuat peluang lewat.","Aksi: gunakan aturan belajar 30 menit per hari selama 7 hari."],
+      ["Belajar jika terpaksa",2,"Anda reaktif. Ubah menjadi proaktif pada skill yang berdampak ke penghasilan.","Aksi: pilih satu skill yang langsung terkait transaksi."],
+      ["Cepat mencoba",3,"Anda adaptif dan memiliki keunggulan.","Aksi: setiap belajar, buat proyek kecil nyata."],
+      ["Cepat belajar dan langsung memonetisasi",4,"Anda mengubah pengetahuan menjadi hasil dengan cepat.","Aksi: dokumentasikan framework belajar-monetisasi Anda."]
+    ]
+  },
+  {
+    category:"Kemampuan Menghasilkan", title:"Fokus Nilai",
+    q:"Apa fokus utama saat Anda bekerja?",
+    options:[
+      ["Sibuk sebanyak mungkin",1,"Kesibukan tidak selalu menghasilkan nilai ekonomi.","Aksi: identifikasi 20% aktivitas yang paling dekat ke hasil."],
+      ["Menyelesaikan tugas",2,"Tugas penting, tetapi ukur dampaknya terhadap pengguna dan bisnis.","Aksi: hubungkan tugas dengan satu KPI."],
+      ["Menyelesaikan masalah bernilai",3,"Anda sudah berpikir berbasis hasil.","Aksi: cari masalah dengan urgensi dan willingness-to-pay tinggi."],
+      ["Membangun sistem nilai berulang",4,"Anda sudah bergerak dari pekerja ke pembangun aset.","Aksi: otomasi atau delegasikan proses yang berulang."]
+    ]
+  },
+
+  {
+    category:"Bisnis & Penjualan", title:"Problem-Market Fit",
+    q:"Seberapa jelas masalah pelanggan yang Anda selesaikan?",
+    options:[
+      ["Belum jelas",1,"Produk tanpa masalah jelas sulit dijual.","Aksi: wawancarai 5 calon pelanggan tentang masalah mereka."],
+      ["Masih umum",2,"Masalah terlalu luas membuat penawaran kurang tajam.","Aksi: pilih satu segmen dan satu masalah spesifik."],
+      ["Cukup spesifik",3,"Anda sudah mendekati kebutuhan nyata.","Aksi: gunakan bahasa pelanggan dalam copy."],
+      ["Sangat spesifik dan terbukti",4,"Kesesuaian masalah-pasar adalah kekuatan Anda.","Aksi: scale distribusi tanpa mengubah inti problem yang terbukti."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Kekuatan Offer",
+    q:"Apakah penawaran Anda mudah dipahami dan menarik?",
+    options:[
+      ["Tidak",1,"Calon pembeli mungkin tidak melihat alasan untuk bertindak.","Aksi: sederhanakan menjadi hasil, waktu, bukti, harga, CTA."],
+      ["Lumayan",2,"Offer perlu pembeda yang lebih kuat.","Aksi: tambahkan bonus, jaminan yang wajar, atau demonstrasi."],
+      ["Cukup kuat",3,"Penawaran Anda sudah bekerja.","Aksi: tes headline dan paket untuk menaikkan conversion."],
+      ["Sangat kuat dan konsisten closing",4,"Offer adalah mesin pertumbuhan Anda.","Aksi: perbesar distribusi dengan menjaga kualitas delivery."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Pricing Power",
+    q:"Bagaimana Anda menentukan harga?",
+    options:[
+      ["Ikut harga termurah",1,"Perang harga menekan margin dan kemampuan bertumbuh.","Aksi: tentukan nilai hasil, biaya delivery, dan positioning."],
+      ["Berdasarkan biaya + sedikit margin",2,"Pendekatan ini aman tetapi mungkin mengabaikan value.","Aksi: bandingkan harga dengan nilai hasil yang diterima pelanggan."],
+      ["Berdasarkan value dan pasar",3,"Anda menggunakan pendekatan yang lebih sehat.","Aksi: buat 3 paket harga untuk segmentasi."],
+      ["Punya data conversion dan margin",4,"Pricing Anda sudah berbasis data.","Aksi: lakukan eksperimen harga secara terkontrol."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Lead Generation",
+    q:"Berapa sumber lead yang aktif menghasilkan prospek?",
+    options:[
+      ["Tidak ada yang konsisten",1,"Tanpa aliran prospek, penjualan akan tidak stabil.","Aksi: pilih satu channel dan lakukan setiap hari selama 30 hari."],
+      ["1 sumber",2,"Ketergantungan pada satu sumber menciptakan risiko.","Aksi: kuatkan channel utama sebelum menambah channel kedua."],
+      ["2–3 sumber",3,"Distribusi Anda cukup sehat.","Aksi: ukur CPL/waktu per lead untuk menentukan prioritas."],
+      ["Banyak dan terukur",4,"Anda memiliki mesin akuisisi yang baik.","Aksi: optimalkan kualitas lead, bukan hanya volume."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Follow-Up",
+    q:"Apa yang terjadi setelah calon pelanggan belum membeli?",
+    options:[
+      ["Tidak di-follow-up",1,"Banyak penjualan hilang karena percakapan berhenti terlalu cepat.","Aksi: buat minimal 3 follow-up yang sopan dan bernilai."],
+      ["Follow-up sekali",2,"Satu follow-up sering belum cukup.","Aksi: buat sequence 3–5 follow-up dengan jeda."],
+      ["Ada beberapa follow-up",3,"Anda sudah memiliki proses yang baik.","Aksi: ukur follow-up mana yang paling banyak menghasilkan respons."],
+      ["Terstruktur dan dicatat",4,"Follow-up Anda adalah aset proses.","Aksi: segmentasikan follow-up berdasarkan status lead."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Repeat Order",
+    q:"Berapa banyak pelanggan yang membeli kembali?",
+    options:[
+      ["Hampir tidak ada",1,"Biaya mendapatkan pelanggan akan terasa mahal jika tidak ada repeat order.","Aksi: tanyakan kebutuhan lanjutan setelah delivery."],
+      ["Sedikit",2,"Ada sinyal peluang retention.","Aksi: buat satu produk lanjutan atau paket refill."],
+      ["Lumayan banyak",3,"Bisnis Anda memiliki potensi customer lifetime value yang baik.","Aksi: buat program repeat yang lebih sistematis."],
+      ["Mayoritas kembali",4,"Retention adalah kekuatan utama Anda.","Aksi: manfaatkan referral dan membership."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Database Pelanggan",
+    q:"Apakah data prospek dan pelanggan tersimpan rapi?",
+    options:[
+      ["Tidak",1,"Tanpa database, Anda berulang kali mulai dari nol.","Aksi: buat sheet sederhana nama, kontak, status, kebutuhan."],
+      ["Ada tetapi berantakan",2,"Data belum menjadi aset karena sulit digunakan.","Aksi: bersihkan dan beri status lead."],
+      ["Cukup rapi",3,"Anda sudah punya aset distribusi.","Aksi: buat jadwal follow-up dan broadcast bernilai."],
+      ["Tersegmentasi dan aktif",4,"Database Anda merupakan mesin penjualan.","Aksi: tingkatkan personalisasi berdasarkan segmen."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Bukti Sosial",
+    q:"Seberapa kuat bukti hasil yang Anda tampilkan?",
+    options:[
+      ["Tidak ada",1,"Tanpa bukti, pelanggan harus mengambil risiko kepercayaan lebih besar.","Aksi: dokumentasikan hasil pelanggan pertama."],
+      ["Ada 1–2 testimoni",2,"Fondasi trust sudah mulai terbentuk.","Aksi: ubah testimoni menjadi studi kasus singkat."],
+      ["Banyak testimoni",3,"Bukti sosial Anda membantu conversion.","Aksi: klasifikasikan testimoni sesuai masalah pelanggan."],
+      ["Ada studi kasus dan angka",4,"Anda memiliki trust asset yang kuat.","Aksi: letakkan bukti dekat CTA dan penawaran."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Sistem Penjualan",
+    q:"Apakah proses dari lead hingga closing sudah memiliki tahapan jelas?",
+    options:[
+      ["Belum",1,"Tanpa proses, hasil sulit diulang.","Aksi: tulis tahapan lead → kontak → diagnosis → offer → follow-up → closing."],
+      ["Sebagian",2,"Ada proses tetapi masih bergantung improvisasi.","Aksi: dokumentasikan skrip dan checklist."],
+      ["Sudah cukup jelas",3,"Anda sudah bisa mengukur bottleneck.","Aksi: ukur conversion tiap tahap."],
+      ["Sangat terukur",4,"Mesin penjualan Anda siap diskalakan.","Aksi: otomasi pelaporan dan coaching."]
+    ]
+  },
+  {
+    category:"Bisnis & Penjualan", title:"Margin",
+    q:"Seberapa baik Anda mengetahui margin bersih dari produk/jasa?",
+    options:[
+      ["Tidak tahu",1,"Omzet tanpa margin bisa menyesatkan.","Aksi: hitung pendapatan dikurangi seluruh biaya langsung dan operasional."],
+      ["Kira-kira",2,"Perkiraan terlalu kasar untuk keputusan scale.","Aksi: hitung margin per produk minggu ini."],
+      ["Tahu untuk sebagian besar produk",3,"Anda punya dasar keputusan yang baik.","Aksi: prioritaskan produk dengan kombinasi margin dan permintaan terbaik."],
+      ["Tahu detail dan dipantau",4,"Anda mengelola bisnis berbasis profitabilitas.","Aksi: optimalkan biaya dan harga secara berkala."]
+    ]
+  },
+
+
+  {
+    category:"Eksekusi & Disiplin", title:"Konsistensi",
+    q:"Berapa lama Anda biasanya bertahan menjalankan satu strategi?",
+    options:[
+      ["Kurang dari 1 minggu",1,"Sering mengganti strategi membuat Anda kehilangan data dan momentum.","Aksi: pilih satu strategi dan komit minimal 30 hari."],
+      ["1–4 minggu",2,"Anda mulai membangun disiplin, tetapi mudah teralihkan.","Aksi: tentukan indikator kapan strategi layak dievaluasi."],
+      ["1–3 bulan",3,"Konsistensi Anda cukup kuat.","Aksi: dokumentasikan hasil dan iterasi."],
+      ["Sampai ada data cukup",4,"Anda membedakan ketekunan dari keras kepala melalui data.","Aksi: pertahankan siklus tes → ukur → perbaiki."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Prioritas",
+    q:"Bagaimana Anda memilih pekerjaan harian?",
+    options:[
+      ["Apa yang terasa mendesak",1,"Urgensi orang lain bisa menguasai agenda Anda.","Aksi: pilih 3 pekerjaan berdampak tinggi sebelum membuka distraksi."],
+      ["Daftar tugas panjang",2,"Banyak tugas tidak selalu berarti banyak hasil.","Aksi: tandai 1 tugas yang paling dekat ke revenue/asset."],
+      ["Berdasarkan dampak",3,"Anda sudah memakai prinsip leverage.","Aksi: blok waktu untuk pekerjaan bernilai tinggi."],
+      ["Berdasarkan sistem KPI",4,"Prioritas Anda terhubung dengan hasil.","Aksi: review KPI setiap minggu."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Kecepatan Eksekusi",
+    q:"Saat punya ide bisnis baru, berapa cepat Anda mengujinya?",
+    options:[
+      ["Berbulan-bulan",1,"Ide yang terlalu lama dipikirkan tidak menghasilkan data pasar.","Aksi: buat versi uji dalam 48 jam."],
+      ["Beberapa minggu",2,"Anda bisa mempercepat dengan MVP yang lebih kecil.","Aksi: kurangi fitur sampai bisa diuji minggu ini."],
+      ["Beberapa hari",3,"Anda punya kecepatan eksperimen yang baik.","Aksi: tetapkan metrik keberhasilan sebelum tes."],
+      ["Dalam 24–48 jam",4,"Kecepatan belajar pasar adalah keunggulan Anda.","Aksi: jaga kualitas eksperimen agar tidak sekadar cepat."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Menghadapi Kegagalan",
+    q:"Apa yang Anda lakukan ketika strategi tidak berhasil?",
+    options:[
+      ["Berhenti",1,"Kegagalan awal sering hanya berarti hipotesis belum tepat.","Aksi: tulis apa yang gagal dan satu variabel untuk diuji ulang."],
+      ["Ganti semuanya",2,"Mengubah terlalu banyak variabel membuat Anda tidak tahu penyebabnya.","Aksi: ubah satu variabel setiap eksperimen."],
+      ["Evaluasi lalu iterasi",3,"Anda memiliki pola belajar yang sehat.","Aksi: dokumentasikan insight setiap eksperimen."],
+      ["Punya sistem eksperimen",4,"Anda mengubah kegagalan menjadi data.","Aksi: tingkatkan kecepatan siklus eksperimen."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Manajemen Waktu",
+    q:"Berapa banyak waktu fokus yang Anda punya setiap hari untuk meningkatkan penghasilan/aset?",
+    options:[
+      ["Hampir tidak ada",1,"Tanpa waktu yang dilindungi, tujuan finansial akan selalu kalah oleh rutinitas.","Aksi: blok 30 menit pertama besok."],
+      ["<1 jam",2,"Waktu kecil tetap bisa menghasilkan jika sangat fokus.","Aksi: gunakan hanya untuk aktivitas dekat ke transaksi."],
+      ["1–2 jam",3,"Anda memiliki kapasitas eksekusi yang baik.","Aksi: pecah waktu menjadi produksi, distribusi, dan follow-up."],
+      [">2 jam",4,"Anda punya ruang besar untuk membangun aset.","Aksi: pastikan waktu tidak habis pada pekerjaan bernilai rendah."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Disiplin Follow Through",
+    q:"Berapa banyak proyek yang Anda mulai tetapi tidak selesai?",
+    options:[
+      ["Sangat banyak",1,"Ide tanpa penyelesaian tidak menjadi aset.","Aksi: pilih satu proyek dan hentikan sementara sisanya."],
+      ["Cukup banyak",2,"Anda butuh batas proyek aktif.","Aksi: maksimal 2 proyek aktif sampai selesai."],
+      ["Sedikit",3,"Kemampuan menyelesaikan adalah keunggulan.","Aksi: buat definisi selesai sebelum mulai."],
+      ["Hampir selalu selesai",4,"Execution reliability Anda tinggi.","Aksi: pilih proyek dengan leverage lebih besar."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Review Mingguan",
+    q:"Apakah Anda melakukan evaluasi rutin atas hasil kerja dan keuangan?",
+    options:[
+      ["Tidak",1,"Tanpa review, kesalahan yang sama mudah berulang.","Aksi: jadwalkan review 20 menit akhir minggu."],
+      ["Kadang-kadang",2,"Evaluasi perlu ritme tetap.","Aksi: pilih hari dan jam yang konsisten."],
+      ["Hampir setiap minggu",3,"Anda sudah punya loop perbaikan.","Aksi: gunakan template yang sama untuk membandingkan tren."],
+      ["Selalu dan terdokumentasi",4,"Anda memiliki sistem feedback yang kuat.","Aksi: hubungkan review dengan keputusan minggu berikutnya."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Pengambilan Keputusan",
+    q:"Ketika harus membuat keputusan penting, apa yang paling dominan?",
+    options:[
+      ["Takut salah",1,"Menunda keputusan juga memiliki biaya peluang.","Aksi: bedakan keputusan yang bisa dibalik dan yang sulit dibalik."],
+      ["Pendapat banyak orang",2,"Masukan berguna, tetapi keputusan perlu kriteria sendiri.","Aksi: tulis 3 kriteria sebelum meminta saran."],
+      ["Data + intuisi",3,"Kombinasi ini sehat jika data cukup.","Aksi: dokumentasikan asumsi utama."],
+      ["Data, batas risiko, dan eksperimen",4,"Anda memakai kerangka keputusan yang matang.","Aksi: terus ukur hasil keputusan untuk memperbaiki judgement."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Toleransi Ketidaknyamanan",
+    q:"Bagaimana respons Anda terhadap tugas penting yang tidak nyaman seperti menjual, follow-up, atau negosiasi?",
+    options:[
+      ["Sering menghindar",1,"Menghindari ketidaknyamanan menghambat pertumbuhan.","Aksi: lakukan satu tugas paling tidak nyaman sebelum jam 10 pagi."],
+      ["Kadang dilakukan",2,"Anda butuh ritual untuk menurunkan hambatan.","Aksi: gunakan aturan 10 menit: mulai dulu, evaluasi nanti."],
+      ["Biasanya tetap dilakukan",3,"Disiplin Anda cukup kuat.","Aksi: jadwalkan aktivitas sulit pada jam energi terbaik."],
+      ["Terbiasa melakukannya",4,"Anda mampu menukar kenyamanan jangka pendek dengan hasil jangka panjang.","Aksi: fokuskan disiplin ini pada aktivitas leverage tertinggi."]
+    ]
+  },
+  {
+    category:"Eksekusi & Disiplin", title:"Komitmen Belajar",
+    q:"Berapa sering Anda mengalokasikan waktu untuk meningkatkan skill utama?",
+    options:[
+      ["Hampir tidak pernah",1,"Skill yang stagnan membatasi peningkatan nilai Anda.","Aksi: mulai 20 menit belajar terarah per hari."],
+      ["1x seminggu",2,"Sudah ada kebiasaan, tetapi bisa dibuat lebih konsisten.","Aksi: tambahkan latihan praktik, bukan hanya konsumsi materi."],
+      ["3–5x seminggu",3,"Anda mempunyai learning velocity yang baik.","Aksi: hubungkan setiap materi dengan proyek nyata."],
+      ["Setiap hari + praktik",4,"Anda memperkuat human capital secara cepat.","Aksi: monetisasi skill yang paling matang."]
+    ]
+  },
+
+  {
+    category:"Wealth & Leverage", title:"Multiple Income",
+    q:"Berapa sumber penghasilan aktif yang Anda miliki?",
+    options:[
+      ["1",1,"Ketergantungan pada satu sumber meningkatkan risiko cashflow.","Aksi: cari satu sumber tambahan yang memakai skill/aset yang sudah ada."],
+      ["2",2,"Diversifikasi mulai terbentuk.","Aksi: kuatkan sumber kedua sebelum menambah terlalu banyak."],
+      ["3",3,"Anda memiliki ketahanan yang lebih baik.","Aksi: ukur waktu dan margin tiap sumber."],
+      [">3 dan terkelola",4,"Anda memiliki portofolio pendapatan yang matang.","Aksi: fokuskan energi pada sumber paling scalable."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Pendapatan Pasif/Semi-Pasif",
+    q:"Apakah ada pendapatan yang tetap masuk tanpa keterlibatan harian penuh?",
+    options:[
+      ["Tidak ada",1,"Penghasilan Anda masih sepenuhnya terikat waktu.","Aksi: bangun aset kecil yang bisa dijual/berjalan berulang."],
+      ["Sedikit",2,"Anda sudah punya bukti konsep leverage.","Aksi: reinvest hasil ke aset yang sama jika ekonominya sehat."],
+      ["Cukup signifikan",3,"Anda mulai memisahkan waktu dari pendapatan.","Aksi: perkuat durability dan diversifikasi."],
+      ["Mayoritas",4,"Anda telah membangun leverage kuat.","Aksi: fokus pada perlindungan aset, risiko, dan sustainability."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Kepemilikan Aset",
+    q:"Apa yang paling banyak bertambah saat pendapatan Anda naik?",
+    options:[
+      ["Barang konsumsi",1,"Pertumbuhan gaya hidup tidak otomatis meningkatkan kekayaan bersih.","Aksi: arahkan sebagian pembelian ke aset produktif."],
+      ["Tabungan tunai",2,"Kas penting, tetapi terlalu banyak kas bisa kurang produktif.","Aksi: sesuaikan porsi kas dengan kebutuhan dan tujuan."],
+      ["Aset produktif",3,"Anda sudah mengubah pendapatan menjadi kekayaan bersih.","Aksi: ukur return dan risiko setiap aset."],
+      ["Aset produktif + sistem bisnis",4,"Anda membangun leverage finansial dan operasional sekaligus.","Aksi: perkuat tata kelola dan diversifikasi."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Reinvestasi",
+    q:"Apa yang Anda lakukan terhadap keuntungan tambahan?",
+    options:[
+      ["Langsung dibelanjakan",1,"Keuntungan yang selalu dikonsumsi tidak sempat menjadi modal pertumbuhan.","Aksi: tetapkan persentase reinvestasi sebelum menikmati keuntungan."],
+      ["Disimpan saja",2,"Menyimpan aman, tetapi pertumbuhan memerlukan alokasi produktif yang terukur.","Aksi: tentukan porsi untuk skill, marketing, atau aset."],
+      ["Sebagian direinvestasikan",3,"Anda sudah menggunakan compounding bisnis.","Aksi: ukur kanal reinvestasi dengan return terbaik."],
+      ["Direinvestasikan berdasarkan data",4,"Anda mengalokasikan modal secara disiplin.","Aksi: pertahankan hurdle rate dan batas risiko."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Leverage Teknologi",
+    q:"Seberapa besar teknologi membantu Anda melayani lebih banyak orang tanpa menambah kerja linear?",
+    options:[
+      ["Hampir tidak ada",1,"Anda masih menukar waktu dengan hasil secara langsung.","Aksi: digitalisasi satu proses layanan atau penjualan."],
+      ["Ada beberapa tools",2,"Teknologi sudah membantu, tetapi belum menjadi model leverage.","Aksi: integrasikan tools menjadi workflow."],
+      ["Banyak proses digital",3,"Anda mulai mampu melayani lebih banyak orang.","Aksi: otomasi onboarding, delivery, atau reporting."],
+      ["Produk/sistem digital scalable",4,"Teknologi menjadi multiplier utama Anda.","Aksi: fokus pada distribusi, reliability, dan support."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Kepemilikan IP",
+    q:"Apakah Anda memiliki aset intelektual: template, metode, software, konten, database, atau brand?",
+    options:[
+      ["Belum",1,"Aset intelektual dapat mengubah pengetahuan menjadi sesuatu yang bisa dipakai berulang.","Aksi: dokumentasikan metode kerja Anda."],
+      ["Ada tetapi belum dijual",2,"Aset sudah ada, tetapi belum menjadi ekonomi.","Aksi: kemas menjadi produk sederhana."],
+      ["Sudah menghasilkan",3,"IP Anda telah menjadi aset.","Aksi: perkuat distribusi dan perlindungan hak penggunaan."],
+      ["Portofolio IP aktif",4,"Anda memiliki leverage yang kuat.","Aksi: lisensikan, bundling, atau kembangkan recurring model."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Keputusan Berbasis Kekayaan Bersih",
+    q:"Apa ukuran utama keberhasilan finansial Anda?",
+    options:[
+      ["Omzet",1,"Omzet penting, tetapi bukan kekayaan. Perhatikan profit, cashflow, utang, dan aset.","Aksi: hitung kekayaan bersih sederhana bulan ini."],
+      ["Pendapatan bulanan",2,"Pendapatan belum menunjukkan berapa yang benar-benar Anda simpan dan miliki.","Aksi: mulai ukur saving rate dan net worth."],
+      ["Profit + cashflow",3,"Anda sudah melihat kualitas pendapatan.","Aksi: tambahkan tracking aset dan kewajiban."],
+      ["Kekayaan bersih + cashflow",4,"Ukuran Anda selaras dengan pembangunan kekayaan jangka panjang.","Aksi: review pertumbuhan net worth per kuartal."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Horizon Jangka Panjang",
+    q:"Seberapa jauh Anda merencanakan keputusan finansial?",
+    options:[
+      ["Hari ke hari",1,"Tekanan jangka pendek membuat compounding sulit bekerja.","Aksi: buat satu target 12 bulan."],
+      ["1–3 bulan",2,"Anda mulai melihat ke depan, tetapi horizon masih pendek.","Aksi: tambahkan target 1 tahun dan 3 tahun."],
+      ["1–3 tahun",3,"Anda memiliki horizon yang sehat.","Aksi: hubungkan target tahunan dengan kebiasaan mingguan."],
+      [">3 tahun dengan milestone",4,"Anda memberi waktu pada compounding dan sistem untuk bekerja.","Aksi: review asumsi tanpa mengubah arah karena noise jangka pendek."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Keberanian Mengambil Risiko Terukur",
+    q:"Bagaimana sikap Anda terhadap peluang dengan risiko?",
+    options:[
+      ["Menghindari semua risiko",1,"Menghindari seluruh risiko juga bisa berarti kehilangan peluang.","Aksi: cari eksperimen kecil dengan downside terbatas."],
+      ["Sering mengambil risiko tanpa hitung",2,"Keberanian tanpa batas risiko bisa merusak modal.","Aksi: tetapkan kerugian maksimum sebelum bertindak."],
+      ["Mengambil risiko setelah menghitung",3,"Pendekatan Anda seimbang.","Aksi: gunakan eksperimen kecil untuk mengurangi ketidakpastian."],
+      ["Punya portofolio risiko terukur",4,"Anda memahami bahwa pertumbuhan dan perlindungan perlu berjalan bersama.","Aksi: tinjau korelasi risiko antar aset/proyek."]
+    ]
+  },
+  {
+    category:"Wealth & Leverage", title:"Roadmap Rp100 Juta Pertama",
+    q:"Jika target Anda Rp100 juta, seberapa jelas mesin penghasilannya?",
+    options:[
+      ["Belum tahu caranya",1,"Target besar harus dipecah menjadi unit ekonomi sederhana.","Aksi: pilih satu produk, harga, dan hitung jumlah transaksi yang dibutuhkan."],
+      ["Sudah ada ide",2,"Ide perlu diubah menjadi angka dan aktivitas harian.","Aksi: hitung target transaksi per bulan dan per hari."],
+      ["Sudah ada produk dan target",3,"Anda siap menguji kemampuan distribusi dan conversion.","Aksi: ukur lead → closing → omzet setiap minggu."],
+      ["Sudah ada sistem dan tracking",4,"Anda memiliki roadmap yang dapat dikelola.","Aksi: fokus pada bottleneck terbesar: traffic, conversion, harga, atau repeat."]
+    ]
+  }
+];
+
+const STORAGE_ANSWERS = "kaya50_v3_answers";
+const STORAGE_STARTED = "kaya50_v3_started";
+const STORAGE_PREMIUM = "kaya50_v3_premium_unlocked";
+let answers = JSON.parse(localStorage.getItem(STORAGE_ANSWERS) || "{}");
+let current = 0;
+
+const $ = id => document.getElementById(id);
+function saveAnswers(){localStorage.setItem(STORAGE_ANSWERS,JSON.stringify(answers));}
+function isPremium(){return localStorage.getItem(STORAGE_PREMIUM)==="1";}
+function answeredCount(){return Object.keys(answers).filter(k=>answers[k]).length;}
+function answeredInRange(start,end){let n=0;for(let i=start;i<=end;i++)if(answers[i])n++;return n;}
+function firstUnanswered(start,end){for(let i=start;i<=end;i++)if(!answers[i])return i;return -1;}
+function hideAll(){["assessmentSection","interimSection","premiumSection","finalSection"].forEach(id=>$(id).classList.add("hidden"));}
+
+function startJourney(){
+  localStorage.setItem(STORAGE_STARTED,"1");
+  $("introScreen").classList.add("hidden");$("app").classList.remove("hidden");
+  routeState();
+}
+function routeState(){
+  const freeMissing=firstUnanswered(0,19);
+  if(freeMissing!==-1){current=freeMissing;showAssessment();return;}
+  if(!isPremium()){showInterim();return;}
+  const premiumMissing=firstUnanswered(20,49);
+  if(premiumMissing!==-1){current=premiumMissing;showAssessment();return;}
+  showFinal();
+}
+function showAssessment(){hideAll();$("assessmentSection").classList.remove("hidden");renderQuestion();updateProgress();window.scrollTo({top:0,behavior:"smooth"});}
+function stageInfo(index){
+  const n=index+1;
+  if(n<=5)return ["Mengenali Fondasi","Mulai ringan. Yang penting adalah jujur terhadap kondisi nyata Anda."];
+  if(n<=10)return ["Membaca Kondisi Nyata","Sekarang pola keuangan Anda mulai terlihat. Jangan mempercantik jawaban."];
+  if(n<=15)return ["Membuka Potensi Penghasilan","Kita mulai melihat bagaimana kemampuan Anda dapat diubah menjadi nilai dan penghasilan."];
+  if(n<=17)return ["Mendekati Titik Penentu","Jawaban berikut mulai menghubungkan skill, nilai, dan peluang Anda."];
+  if(n===18)return ["🔥 Pola Anda Mulai Terbentuk","Tinggal 3 pertanyaan menuju hasil sementara pertama Anda."];
+  if(n===19)return ["🔥 Hampir Sampai","Satu langkah lagi setelah ini. Jawab berdasarkan kenyataan, bukan harapan."];
+  if(n===20)return ["⚡ PERTANYAAN PENENTU","Ini melengkapi 20 assessment pertama. Jawab sejujur mungkin sebelum hasil Anda dibuka."];
+  if(n<=30)return ["Bisnis & Penjualan","Sekarang kita masuk ke kemampuan mengubah nilai menjadi transaksi dan sistem penjualan."];
+  if(n<=40)return ["Eksekusi & Disiplin","Strategi tanpa eksekusi tidak bergerak. Bagian ini memetakan konsistensi dan keputusan Anda."];
+  return ["Wealth & Leverage","Tahap akhir: multiple income, aset, reinvestasi, leverage, dan roadmap jangka panjang."];
+}
+function renderQuestion(){
+  const a=assessments[current], n=current+1, info=stageInfo(current);
+  $("category").textContent=a.category;$("assessmentTitle").textContent=a.title;$("assessmentNumber").textContent=n+" / 50";$("question").textContent=a.q;
+  $("progressLabel").textContent=info[0];$("stageMessage").textContent=info[1];
+  const card=$("assessmentCard");card.classList.remove("climax1","climax2");if(n>=16&&n<20)card.classList.add("climax1");if(n===20)card.classList.add("climax2");
+  const cb=$("climaxBanner");if(n>=16&&n<=20){cb.classList.remove("hidden");cb.textContent=info[1];}else cb.classList.add("hidden");
+  const letters=["A","B","C","D"],box=$("options");box.innerHTML="";
+  a.options.forEach((opt,i)=>{const b=document.createElement("button");b.className="option"+(answers[current]?.option===i?" selected":"");b.innerHTML=`<span class="opt-letter">${letters[i]}</span><span>${opt[0]}</span>`;b.onclick=()=>selectOption(i);box.appendChild(b);});
+  if(answers[current]){const opt=a.options[answers[current].option];$("adviceText").textContent=opt[2];$("actionText").textContent=opt[3];$("adviceBox").classList.remove("hidden");}else $("adviceBox").classList.add("hidden");
+  $("prevBtn").disabled=current===0;
+  $("nextBtn").textContent=n===20?"Lihat Hasil Sementara →":n===50?"Lihat Hasil Akhir →":"Berikutnya →";
+  $("accessPill").textContent=isPremium()?"🔓 Premium Aktif":"🟢 Gratis 1–20";
+}
+function selectOption(i){const a=assessments[current];answers[current]={option:i,score:a.options[i][1]};saveAnswers();renderQuestion();updateProgress();}
+function nextQuestion(){
+  if(!answers[current]){alert("Pilih salah satu jawaban terlebih dahulu agar nasihat dapat diberikan.");return;}
+  if(current===19){
+    if(isPremium()){current++;showAssessment();}else{showInterim();}
+    return;
+  }
+  if(current===49){showFinal();return;}
+  if(current===20 && !isPremium()){showPremium();return;}
+  current++;showAssessment();
+}
+function prevQuestion(){if(current>0){current--;showAssessment();}}
+function updateProgress(){
+  const paid=isPremium(), scopeMax=paid?50:20, scopeDone=paid?answeredInRange(0,49):answeredInRange(0,19), pct=Math.round(scopeDone/scopeMax*100);
+  $("progressFill").style.width=pct+"%";$("progressPct").textContent=pct+"%";$("headerProgress").textContent=answeredCount()+" / 50";
+}
+function calcScore(start,end){let total=0,count=0;for(let i=start;i<=end;i++){if(answers[i]){total+=answers[i].score;count++;}}if(!count)return 0;return Math.round(total/(count*4)*100);}
+function categoryScores(start,end){const g={};for(let i=start;i<=end;i++){const a=assessments[i];if(!g[a.category])g[a.category]={score:0,max:0};g[a.category].max+=4;g[a.category].score+=answers[i]?.score||0;}Object.keys(g).forEach(k=>g[k].pct=Math.round(g[k].score/g[k].max*100));return g;}
+function renderBars(target,groups){$(target).innerHTML=Object.entries(groups).map(([n,v])=>`<div class="bar-row"><div class="bar-label"><span>${n}</span><b>${v.pct}%</b></div><div class="bar"><div style="width:${v.pct}%"></div></div></div>`).join("");}
+function showInterim(){
+  hideAll();$("interimSection").classList.remove("hidden");const s=calcScore(0,19);$("interimScore").textContent=s;$("interimRing").style.background=`conic-gradient(var(--gold) ${s*3.6}deg,rgba(255,255,255,.18) 0deg)`;
+  let text=s<40?"20 jawaban pertama menunjukkan bahwa fondasi Anda masih perlu diperkuat. Ini bukan vonis; ini peta untuk menentukan langkah yang lebih tepat.":s<60?"Potensi Anda mulai terlihat, tetapi beberapa kebiasaan dan kemampuan masih menjadi bottleneck. Hasil ini membantu menentukan apa yang perlu didahulukan.":s<80?"Fondasi Anda cukup baik. Peluang peningkatan berikutnya kemungkinan datang dari monetisasi skill, penjualan, dan sistem yang lebih konsisten.":"Fondasi awal Anda kuat. Tahap berikutnya adalah menguji apakah kekuatan tersebut sudah berubah menjadi sistem bisnis, eksekusi, aset, dan leverage.";
+  $("interimSummary").textContent=text;const groups=categoryScores(0,19);renderBars("interimBars",groups);
+  const weak=[];for(let i=0;i<20;i++)weak.push({i,s:answers[i].score});weak.sort((a,b)=>a.s-b.s);$("interimAdvice").innerHTML=weak.slice(0,4).map(x=>{const a=assessments[x.i],o=a.options[answers[x.i].option];return `<li style="font-size:15px"><b>${a.title}</b><br>${o[2]}<br><span style="font-size:13px;color:var(--muted)">${o[3]}</span></li>`}).join("");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function showPremium(){hideAll();$("premiumSection").classList.remove("hidden");refreshPremiumState();window.scrollTo({top:0,behavior:"smooth"});}
+function refreshPremiumState(){
+  const unlocked=isPremium();
+  const pwd=$("premiumPassword"), btn=$("unlockBtn");
+  if(unlocked){
+    pwd.disabled=true;
+    btn.disabled=false;
+    btn.textContent="▶ Lanjut ke Assessment 21";
+    btn.onclick=()=>{const nxt=firstUnanswered(20,49);current=nxt===-1?20:nxt;showAssessment();};
+  }else{
+    pwd.disabled=false;
+    btn.disabled=false;
+    btn.textContent="🔓 Buka Premium";
+    btn.onclick=unlockPremium;
+  }
+  const status=$("activationStatus");
+  const ref = localStorage.getItem('kaya50_ref');
+  if(unlocked){
+    status.className="activation-status ok";
+    status.textContent="✅ Akses Premium sudah aktif pada browser ini.";
+    $("premiumSuccess").classList.remove("hidden");
+    $("premiumSuccess").textContent="Premium aktif. Anda dapat melanjutkan ke assessment 21.";
+  }else if(ref){
+    status.className="activation-status ok";
+    status.textContent="✅ Link reseller terdeteksi. Masukkan password dari reseller untuk unlock.";
+  }else{
+    status.className="activation-status";
+    status.textContent="🔒 Link reseller tidak terdeteksi. Buka link reseller (contoh: https://abi.aipronusa.com/?ref=R001) lalu masukkan password.";
+  }
+}
+async function unlockPremium(){
+  $("premiumError").classList.add("hidden");
+  const pwd = $("premiumPassword").value.trim();
+  const ref = localStorage.getItem('kaya50_ref');
+  if (!ref) { showPremiumError("Link reseller tidak terdeteksi. Buka link reseller yang benar."); return; }
+  if (!pwd) { showPremiumError("Masukkan password dari reseller."); return; }
+
+  try {
+    const res = await fetch('/api/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref, password: pwd, buyer_name: '', buyer_wa: '' })
+    });
+    const data = await res.json();
+    if (!data.success) { showPremiumError(data.message); return; }
+
+    localStorage.setItem(STORAGE_PREMIUM, "1");
+    $("premiumSuccess").classList.remove("hidden");
+    $("premiumSuccess").textContent = "✅ " + data.message;
+    refreshPremiumState();
+    setTimeout(() => { current = firstUnanswered(20,49); if(current===-1) current=20; showAssessment(); }, 650);
+  } catch (e) {
+    showPremiumError("Terjadi kesalahan. Coba lagi nanti.");
+  }
+}
+function showPremiumError(msg){$("premiumError").textContent=msg;$("premiumError").classList.remove("hidden");}
+function fullSummary(score){if(score<40)return"Hasil lengkap menunjukkan prioritas utama Anda adalah memperkuat fondasi finansial, skill yang dapat dimonetisasi, dan konsistensi eksekusi. Kerjakan sedikit hal, tetapi ukur dan ulangi.";if(score<60)return"Anda memiliki beberapa fondasi yang sudah bekerja. Fokus berikutnya adalah menghilangkan bottleneck terbesar dan membangun satu mesin penghasilan yang bisa diulang.";if(score<80)return"Kesiapan Anda cukup kuat. Pertumbuhan berikutnya akan banyak ditentukan oleh distribusi, sistem penjualan, disiplin, recurring income, dan reinvestasi.";return"Fondasi Anda kuat di banyak area. Tahap berikutnya adalah memperbesar leverage secara terukur sambil menjaga cashflow, risiko, kualitas aset, dan keberlanjutan sistem.";}
+function showFinal(){
+  if(!isPremium()){showPremium();return;}if(firstUnanswered(0,49)!==-1){current=firstUnanswered(0,49);showAssessment();return;}
+  hideAll();$("finalSection").classList.remove("hidden");const s=calcScore(0,49);$("finalScore").textContent=s;$("finalRing").style.background=`conic-gradient(var(--gold) ${s*3.6}deg,rgba(255,255,255,.18) 0deg)`;$("finalSummary").textContent=fullSummary(s);
+  const groups=categoryScores(0,49),entries=Object.entries(groups).sort((a,b)=>b[1].pct-a[1].pct);renderBars("finalBars",groups);
+  $("strengthList").innerHTML=entries.slice(0,2).map(([n,v])=>`<li style="font-size:15px"><b>${n}</b><br>Skor ${v.pct}%. Gunakan area ini sebagai pengungkit untuk memperkuat bagian lain.</li>`).join("");
+  $("priorityList").innerHTML=entries.slice(-2).reverse().map(([n,v])=>`<li style="font-size:15px"><b>${n}</b><br>Skor ${v.pct}%. Jadikan area ini fokus 30–90 hari berikutnya.</li>`).join("");
+  const weak=assessments.map((a,i)=>({a,i,s:answers[i].score})).sort((x,y)=>x.s-y.s).slice(0,5);$("bigAdvice").innerHTML=weak.map(x=>{const o=x.a.options[answers[x.i].option];return `<li style="font-size:15px"><b>${x.a.title}</b><br>${o[2]}<br><span style="font-size:13px;color:var(--muted)">${o[3]}</span></li>`}).join("");window.scrollTo({top:0,behavior:"smooth"});
+}
+function copySalesText(){const t=`KAYA50 — 50 Assessment Pertumbuhan Penghasilan\n\n20 assessment awal gratis. Setiap jawaban langsung mendapat nasihat. Lanjutkan versi lengkap untuk mendapatkan hasil akhir dan action plan.\n\nHarga akses premium: Rp10.000.\n\nKAYA50 adalah alat assessment edukatif, bukan jaminan cepat kaya atau hasil finansial tertentu.`;navigator.clipboard.writeText(t).then(()=>alert("Teks penjualan berhasil disalin."));}
+function resetJourney(){if(confirm("Hapus seluruh jawaban dan mulai dari awal? (Status Premium tetap tersimpan)")){[STORAGE_ANSWERS,STORAGE_STARTED].forEach(k=>localStorage.removeItem(k));answers={};current=0;$("app").classList.add("hidden");$("introScreen").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}}
+
+window.addEventListener("focus",()=>{if(!$("premiumSection").classList.contains("hidden"))refreshPremiumState();});
+if(localStorage.getItem(STORAGE_STARTED)==="1"){$("introScreen").classList.add("hidden");$("app").classList.remove("hidden");routeState();}
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "kaya50-api",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "bot": "node bot/index.js"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.6.0",
+    "telegraf": "^4.16.3"
+  }
+}
