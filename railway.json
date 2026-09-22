@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.railway.com/railway.json",
+  "build": {
+    "builder": "railpack",
+    "buildCommand": "npm install"
+  },
+  "deploy": {
+    "startCommand": "node bot/index.js",
+    "restartPolicy": {
+      "enabled": true,
+      "maxRetries": 10
+    }
+  }
+}
