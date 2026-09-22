@@ -9,8 +9,7 @@
   ],
   "functions": {
     "api/**/*.js": {
-      "maxDuration": 30,
-      "memory": 1024
+      "maxDuration": 30
     }
   },
   "env": {
