@@ -3,11 +3,13 @@ import { db, initDB } from '../lib/db.js';
 import crypto from 'crypto';
 
 const DOMAIN = process.env.DOMAIN || 'https://kaya50.vercel.app';
+const GLOBAL_PASSWORD = process.env.GLOBAL_PASSWORD || 'JAYA123';
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 console.log('Env check:', {
   BOT_TOKEN: process.env.BOT_TOKEN ? 'SET' : 'MISSING',
   DOMAIN: process.env.DOMAIN,
+  GLOBAL_PASSWORD: process.env.GLOBAL_PASSWORD ? 'SET' : 'DEFAULT',
   TURSO_DATABASE_URL: process.env.TURSO_DATABASE_URL ? 'SET' : 'MISSING',
   TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN ? 'SET' : 'MISSING',
 });
@@ -28,7 +30,7 @@ function genLicenseCode() {
 bot.start(async (ctx) => {
   const tgId = ctx.from.id;
   const existing = await db.execute({ sql: 'SELECT * FROM resellers WHERE telegram_id = ?', args: [tgId] });
-  
+
   if (existing.rows.length > 0) {
     const r = existing.rows[0];
     return ctx.reply(
@@ -40,9 +42,27 @@ bot.start(async (ctx) => {
     );
   }
 
-  ctx.reply('👋 Selamat datang! Daftar jadi Reseller KAYA50\n\nIsi data berikut:');
-  userState.set(tgId, { step: 'nama' });
-  ctx.reply('1️⃣ Nama lengkap:');
+  // Buat reseller baru dengan password global
+  const ref = genRefCode();
+  await db.execute({
+    sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
+    args: [tgId, ctx.from.username || '', 'Admin', '08123456789', ref, GLOBAL_PASSWORD]
+  });
+
+  for (let i = 0; i < 10; i++) {
+    await db.execute({
+      sql: `INSERT INTO licenses (license_code, ref_code, password) VALUES (?, ?, ?)`,
+      args: [genLicenseCode(), ref, GLOBAL_PASSWORD]
+    });
+  }
+
+  return ctx.reply(
+    `✅ Link siap!\n\n` +
+    `🔗 Link: ${DOMAIN}/?ref=${ref}\n` +
+    `🔑 Password: ${GLOBAL_PASSWORD}\n` +
+    `💰 Komisi: 30%\n\n` +
+    `Bagikan link ini ke calon pembeli. Password sama untuk semua pembeli.`
+  );
 });
 
 bot.on('text', async (ctx) => {
@@ -55,15 +75,15 @@ bot.on('text', async (ctx) => {
       state.nama = ctx.message.text;
       state.step = 'wa';
       return ctx.reply('2️⃣ Nomor WA (contoh: 08123456789):');
-    
+
     case 'wa':
       state.wa = ctx.message.text;
       state.step = 'password';
       return ctx.reply('3️⃣ Password custom untuk pembeli (contoh: MAKMUR2025):');
-    
+
     case 'password':
       state.password = ctx.message.text;
-      
+
       const ref = genRefCode();
       await db.execute({
         sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
@@ -115,7 +135,7 @@ bot.command('generate', async (ctx) => {
   const args = ctx.message.text.split(' ').slice(1);
   const ref = args[0];
   const count = parseInt(args[1]) || 10;
-  
+
   const reseller = await db.execute({ sql: 'SELECT custom_password FROM resellers WHERE ref_code = ?', args: [ref] });
   if (reseller.rows.length === 0) return ctx.reply('❌ Reseller tidak ditemukan.');
 
