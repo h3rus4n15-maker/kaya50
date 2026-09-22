@@ -9,8 +9,13 @@
   ],
   "functions": {
     "api/**/*.js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "memory": 1024
     }
+  },
+  "env": {
+    "BOT_TOKEN": "8617878329:AAGgQGhl6Wsf8XOXCJMhZVXdiPswJjrClUY",
+    "DOMAIN": "https://kaya50.vercel.app"
   },
   "headers": [
     {
