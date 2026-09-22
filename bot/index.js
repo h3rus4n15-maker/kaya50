@@ -109,9 +109,9 @@ bot.on('text', onlyAdmin, async (ctx) => {
 
       try {
         const ref = genRefCode();
-        // telegram_id NULL untuk reseller yang dibuat via /daftar (admin bisa buat banyak)
+        // telegram_id tidak diisi (NULL) untuk reseller via /daftar
         await db.execute({
-          sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (NULL, ?, ?, ?, ?, ?)`,
+          sql: `INSERT INTO resellers (username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?)`,
           args: [ctx.from.username || '', state.nama, state.wa, ref, state.password]
         });
 
