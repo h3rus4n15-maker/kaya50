@@ -82,7 +82,7 @@ bot.on('text', async (ctx) => {
         `✅ Berhasil daftar reseller!\n\n` +
         `👤 Nama: ${state.nama}\n` +
         `📱 WA: ${state.wa}\n` +
-        `🔗 Link: https://abi.aipronusa.com/?ref=${ref}\n` +
+        `🔗 Link: ${DOMAIN}/?ref=${ref}\n` +
         `🔑 Password pembeli: ${state.password}\n` +
         `💰 Komisi: 30% (Rp3.000/jual)\n\n` +
         `📦 10 license sudah siap dijual.\n` +
