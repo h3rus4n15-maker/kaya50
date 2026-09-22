@@ -5,6 +5,16 @@ import crypto from 'crypto';
 const DOMAIN = process.env.DOMAIN || 'https://kaya50.vercel.app';
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
+console.log('Env check:', {
+  BOT_TOKEN: process.env.BOT_TOKEN ? 'SET' : 'MISSING',
+  DOMAIN: process.env.DOMAIN,
+  POSTGRES_URL: process.env.POSTGRES_URL ? 'SET' : 'MISSING',
+  POSTGRES_AUTH_TOKEN: process.env.POSTGRES_AUTH_TOKEN ? 'SET' : 'MISSING',
+});
+
+process.on('unhandledRejection', (r) => console.error('Unhandled rejection:', r));
+process.on('uncaughtException', (e) => { console.error('Uncaught exception:', e.message); process.exit(1); });
+
 const userState = new Map();
 
 function genRefCode() {
@@ -116,6 +126,6 @@ bot.command('generate', async (ctx) => {
   ctx.reply(`✅ Generated ${count} license untuk ${ref}`);
 });
 
-await initDB();
-bot.launch();
+await initDB().catch(e => { console.error('DB init failed:', e.message); });
+bot.launch().catch(e => { console.error('Bot launch failed:', e.message); });
 console.log('🤖 Bot running...');
