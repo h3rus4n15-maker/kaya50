@@ -2,6 +2,7 @@ import { Telegraf } from 'telegraf';
 import { db, initDB } from '../lib/db.js';
 import crypto from 'crypto';
 
+const DOMAIN = process.env.DOMAIN || 'https://kaya50.vercel.app';
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const userState = new Map();
@@ -22,7 +23,7 @@ bot.start(async (ctx) => {
     const r = existing.rows[0];
     return ctx.reply(
       `✅ Kamu sudah terdaftar sebagai reseller!\n\n` +
-      `🔗 Link: https://abi.aipronusa.com/?ref=${r.ref_code}\n` +
+      `🔗 Link: ${DOMAIN}/?ref=${r.ref_code}\n` +
       `🔑 Password: ${r.custom_password}\n` +
       `💰 Komisi: ${r.komisi_persen}%\n\n` +
       `Gunakan /laporan untuk cek penghasilan.`
