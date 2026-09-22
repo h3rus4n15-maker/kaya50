@@ -44,6 +44,21 @@ bot.start(async (ctx) => {
     return ctx.reply('❌ Bot ini hanya untuk admin. Hubungi admin untuk dapat akses.');
   }
 
+  // Cek apakah admin sudah punya reseller
+  const existing = await db.execute({ sql: 'SELECT * FROM resellers WHERE telegram_id = ?', args: [ctx.from.id] });
+
+  if (existing.rows.length > 0) {
+    const r = existing.rows[0];
+    return ctx.reply(
+      `✅ Kamu sudah terdaftar sebagai reseller!\n\n` +
+      `🔗 Link: ${DOMAIN}/?ref=${r.ref_code}\n` +
+      `🔑 Password: ${r.custom_password}\n` +
+      `💰 Komisi: ${r.komisi_persen}%\n\n` +
+      `Gunakan /daftar untuk buat reseller baru.\n` +
+      `Gunakan /laporan untuk cek penghasilan.`
+    );
+  }
+
   const ref = genRefCode();
   await db.execute({
     sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
@@ -94,9 +109,10 @@ bot.on('text', onlyAdmin, async (ctx) => {
 
       try {
         const ref = genRefCode();
+        // telegram_id NULL untuk reseller yang dibuat via /daftar (admin bisa buat banyak)
         await db.execute({
-          sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
-          args: [tgId, ctx.from.username || '', state.nama, state.wa, ref, state.password]
+          sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (NULL, ?, ?, ?, ?, ?)`,
+          args: [ctx.from.username || '', state.nama, state.wa, ref, state.password]
         });
 
         for (let i = 0; i < 10; i++) {
