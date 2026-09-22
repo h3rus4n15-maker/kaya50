@@ -20,6 +20,7 @@ process.on('unhandledRejection', (r) => console.error('Unhandled rejection:', r)
 process.on('uncaughtException', (e) => { console.error('Uncaught exception:', e.message); process.exit(1); });
 
 const userState = new Map();
+let dummyTgCounter = 0;
 
 function genRefCode() {
   return 'R' + Math.random().toString(36).substring(2, 6).toUpperCase();
@@ -27,6 +28,12 @@ function genRefCode() {
 
 function genLicenseCode() {
   return 'LIC-' + crypto.randomBytes(4).toString('hex').toUpperCase();
+}
+
+function genDummyTgId() {
+  // Dummy telegram_id negatif, unik, tidak conflict dengan real Telegram ID (positif)
+  dummyTgCounter++;
+  return -dummyTgCounter;
 }
 
 function isAdmin(ctx) {
@@ -109,10 +116,10 @@ bot.on('text', onlyAdmin, async (ctx) => {
 
       try {
         const ref = genRefCode();
-        // telegram_id tidak diisi (NULL) untuk reseller via /daftar
+        const dummyTgId = genDummyTgId();
         await db.execute({
-          sql: `INSERT INTO resellers (username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?)`,
-          args: [ctx.from.username || '', state.nama, state.wa, ref, state.password]
+          sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
+          args: [dummyTgId, ctx.from.username || '', state.nama, state.wa, ref, state.password]
         });
 
         for (let i = 0; i < 10; i++) {
