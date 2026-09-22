@@ -192,9 +192,9 @@ button,input{font:inherit}.hidden{display:none!important}button{cursor:pointer}.
               <div class="step"><div class="num">1</div><b>Hubungi Reseller</b><p>Beli license dari reseller via link mereka (contoh: https://kaya50.vercel.app/?ref=R001). Reseller akan memberikan password.</p></div>
               <div class="step"><div class="num">2</div><b>Masukkan Password</b><p>Masukkan password yang diberikan reseller di kolom di bawah, lalu klik Buka Premium.</p></div>
             </div>
-            <div style="display:flex;gap:10px;margin-bottom:10px" id="premiumButtons">
-              <a class="btn btn-green" href="https://wa.me/6282247971808?text=Hai%20Abitech%20kirimi%20saya%20passwordnya%20dong" target="_blank" rel="noopener">💬 Hubungi Admin (WA)</a>
-            </div>
+<div style="display:flex;gap:10px;margin-bottom:10px" id="premiumButtons">
+  <a class="btn btn-green" id="waBtn" href="#" target="_blank" rel="noopener" style="display:none">💬 Hubungi Admin (WA)</a>
+</div>
 <div id="resellerInfo" class="hidden" style="margin-bottom:16px;padding:12px;background:#fefce8;border:1px solid #f5d76e;border-radius:12px;">
               📍 Daftar via Reseller: <b id="resellerName"></b> (WA: <span id="resellerWA"></span>)
             </div>
@@ -256,6 +256,11 @@ async function loadResellerInfo() {
       document.getElementById('resellerInfo').classList.remove('hidden');
       document.getElementById('resellerName').textContent = data.reseller.nama;
       document.getElementById('resellerWA').textContent = data.reseller.wa;
+      // Update WA button dengan nomor dinamis
+      const waBtn = document.getElementById('waBtn');
+      const wa = data.reseller.wa.replace(/[^0-9]/g, '');
+      waBtn.href = `https://wa.me/62${wa}?text=Hai%20${encodeURIComponent(data.reseller.nama)}%20kirimi%20saya%20passwordnya%20dong`;
+      waBtn.style.display = 'inline-flex';
     }
   } catch (e) { console.error(e); }
 }
@@ -878,6 +883,8 @@ function refreshPremiumState(){
     status.className="activation-status";
     status.textContent="🔒 Link reseller tidak terdeteksi. Buka link reseller (contoh: https://kaya50.vercel.app/?ref=R001) lalu masukkan password.";
   }
+  // Update WA button dengan data reseller
+  loadResellerInfo();
 }
 async function unlockPremium(){
   $("premiumError").classList.add("hidden");
