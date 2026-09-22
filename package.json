@@ -8,7 +8,7 @@
     "bot": "node bot/index.js"
   },
   "dependencies": {
-    "@libsql/client": "^0.6.0",
+    "@libsql/client": "^0.15.0",
     "telegraf": "^4.16.3",
     "pg": "^8.11.0"
   }
