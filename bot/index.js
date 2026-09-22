@@ -92,30 +92,36 @@ bot.on('text', onlyAdmin, async (ctx) => {
     case 'password':
       state.password = ctx.message.text;
 
-      const ref = genRefCode();
-      await db.execute({
-        sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
-        args: [tgId, ctx.from.username || '', state.nama, state.wa, ref, state.password]
-      });
-
-      for (let i = 0; i < 10; i++) {
+      try {
+        const ref = genRefCode();
         await db.execute({
-          sql: `INSERT INTO licenses (license_code, ref_code, password) VALUES (?, ?, ?)`,
-          args: [genLicenseCode(), ref, state.password]
+          sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
+          args: [tgId, ctx.from.username || '', state.nama, state.wa, ref, state.password]
         });
-      }
 
-      userState.delete(tgId);
-      return ctx.reply(
-        `✅ Reseller terdaftar!\n\n` +
-        `👤 Nama: ${state.nama}\n` +
-        `📱 WA: ${state.wa}\n` +
-        `🔗 Link: ${DOMAIN}/?ref=${ref}\n` +
-        `🔑 Password: ${state.password}\n` +
-        `💰 Komisi: 30% (Rp3.000/jual)\n\n` +
-        `📦 10 license sudah siap dijual.\n` +
-        `Gunakan /laporan untuk cek penghasilan.`
-      );
+        for (let i = 0; i < 10; i++) {
+          await db.execute({
+            sql: `INSERT INTO licenses (license_code, ref_code, password) VALUES (?, ?, ?)`,
+            args: [genLicenseCode(), ref, state.password]
+          });
+        }
+
+        userState.delete(tgId);
+        return ctx.reply(
+          `✅ Reseller terdaftar!\n\n` +
+          `👤 Nama: ${state.nama}\n` +
+          `📱 WA: ${state.wa}\n` +
+          `🔗 Link: ${DOMAIN}/?ref=${ref}\n` +
+          `🔑 Password: ${state.password}\n` +
+          `💰 Komisi: 30% (Rp3.000/jual)\n\n` +
+          `📦 10 license sudah siap dijual.\n` +
+          `Gunakan /laporan untuk cek penghasilan.`
+        );
+      } catch (e) {
+        console.error('Daftar error:', e.message);
+        userState.delete(tgId);
+        return ctx.reply('❌ Gagal daftar: ' + e.message);
+      }
   }
 });
 
