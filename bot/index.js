@@ -4,12 +4,14 @@ import crypto from 'crypto';
 
 const DOMAIN = process.env.DOMAIN || 'https://kaya50.vercel.app';
 const GLOBAL_PASSWORD = process.env.GLOBAL_PASSWORD || 'JAYA123';
+const ADMIN_TG_ID = process.env.ADMIN_TG_ID ? Number(process.env.ADMIN_TG_ID) : null;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 console.log('Env check:', {
   BOT_TOKEN: process.env.BOT_TOKEN ? 'SET' : 'MISSING',
   DOMAIN: process.env.DOMAIN,
   GLOBAL_PASSWORD: process.env.GLOBAL_PASSWORD ? 'SET' : 'DEFAULT',
+  ADMIN_TG_ID: ADMIN_TG_ID || 'NOT SET',
   TURSO_DATABASE_URL: process.env.TURSO_DATABASE_URL ? 'SET' : 'MISSING',
   TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN ? 'SET' : 'MISSING',
 });
@@ -27,26 +29,25 @@ function genLicenseCode() {
   return 'LIC-' + crypto.randomBytes(4).toString('hex').toUpperCase();
 }
 
-bot.start(async (ctx) => {
-  const tgId = ctx.from.id;
-  const existing = await db.execute({ sql: 'SELECT * FROM resellers WHERE telegram_id = ?', args: [tgId] });
+function isAdmin(ctx) {
+  return ADMIN_TG_ID && ctx.from.id === ADMIN_TG_ID;
+}
 
-  if (existing.rows.length > 0) {
-    const r = existing.rows[0];
-    return ctx.reply(
-      `✅ Kamu sudah terdaftar sebagai reseller!\n\n` +
-      `🔗 Link: ${DOMAIN}/?ref=${r.ref_code}\n` +
-      `🔑 Password: ${r.custom_password}\n` +
-      `💰 Komisi: ${r.komisi_persen}%\n\n` +
-      `Gunakan /laporan untuk cek penghasilan.`
-    );
+function onlyAdmin(ctx, next) {
+  if (!isAdmin(ctx)) return ctx.reply('❌ Bot ini hanya untuk admin.');
+  next();
+}
+
+// /start — admin dapat link + password global
+bot.start(async (ctx) => {
+  if (!isAdmin(ctx)) {
+    return ctx.reply('❌ Bot ini hanya untuk admin. Hubungi admin untuk dapat akses.');
   }
 
-  // Buat reseller baru dengan password global
   const ref = genRefCode();
   await db.execute({
     sql: `INSERT INTO resellers (telegram_id, username, nama, wa, ref_code, custom_password) VALUES (?, ?, ?, ?, ?, ?)`,
-    args: [tgId, ctx.from.username || '', 'Admin', '08123456789', ref, GLOBAL_PASSWORD]
+    args: [ctx.from.id, ctx.from.username || '', 'Admin', '08123456789', ref, GLOBAL_PASSWORD]
   });
 
   for (let i = 0; i < 10; i++) {
@@ -61,11 +62,18 @@ bot.start(async (ctx) => {
     `🔗 Link: ${DOMAIN}/?ref=${ref}\n` +
     `🔑 Password: ${GLOBAL_PASSWORD}\n` +
     `💰 Komisi: 30%\n\n` +
-    `Bagikan link ini ke calon pembeli. Password sama untuk semua pembeli.`
+    `Gunakan /daftar untuk buat reseller baru.\n` +
+    `Gunakan /laporan untuk cek penghasilan.`
   );
 });
 
-bot.on('text', async (ctx) => {
+// /daftar — admin daftar reseller baru (nama, WA, password)
+bot.command('daftar', onlyAdmin, (ctx) => {
+  userState.set(ctx.from.id, { step: 'nama' });
+  return ctx.reply('1️⃣ Nama lengkap reseller:');
+});
+
+bot.on('text', onlyAdmin, async (ctx) => {
   const tgId = ctx.from.id;
   const state = userState.get(tgId);
   if (!state) return;
@@ -99,11 +107,11 @@ bot.on('text', async (ctx) => {
 
       userState.delete(tgId);
       return ctx.reply(
-        `✅ Berhasil daftar reseller!\n\n` +
+        `✅ Reseller terdaftar!\n\n` +
         `👤 Nama: ${state.nama}\n` +
         `📱 WA: ${state.wa}\n` +
         `🔗 Link: ${DOMAIN}/?ref=${ref}\n` +
-        `🔑 Password pembeli: ${state.password}\n` +
+        `🔑 Password: ${state.password}\n` +
         `💰 Komisi: 30% (Rp3.000/jual)\n\n` +
         `📦 10 license sudah siap dijual.\n` +
         `Gunakan /laporan untuk cek penghasilan.`
@@ -111,7 +119,8 @@ bot.on('text', async (ctx) => {
   }
 });
 
-bot.command('laporan', async (ctx) => {
+// /laporan — admin cek penghasilan
+bot.command('laporan', onlyAdmin, async (ctx) => {
   const tgId = ctx.from.id;
   const reseller = await db.execute({ sql: 'SELECT * FROM resellers WHERE telegram_id = ?', args: [tgId] });
   if (reseller.rows.length === 0) return ctx.reply('❌ Kamu belum daftar reseller.');
@@ -130,11 +139,13 @@ bot.command('laporan', async (ctx) => {
   );
 });
 
-bot.command('generate', async (ctx) => {
-  if (ctx.from.id !== Number(process.env.ADMIN_TG_ID)) return ctx.reply('❌ Admin only.');
+// /generate — admin generate license
+bot.command('generate', onlyAdmin, async (ctx) => {
   const args = ctx.message.text.split(' ').slice(1);
   const ref = args[0];
   const count = parseInt(args[1]) || 10;
+
+  if (!ref) return ctx.reply('❌ Format: /generate <ref> <count>');
 
   const reseller = await db.execute({ sql: 'SELECT custom_password FROM resellers WHERE ref_code = ?', args: [ref] });
   if (reseller.rows.length === 0) return ctx.reply('❌ Reseller tidak ditemukan.');
