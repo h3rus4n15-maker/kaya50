@@ -1,8 +1,10 @@
 {
   "buildCommand": "echo 'static site'",
+  "outputDirectory": ".",
   "devCommand": "vercel dev",
   "framework": null,
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "functions": {
