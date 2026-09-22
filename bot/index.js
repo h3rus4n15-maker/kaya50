@@ -8,8 +8,8 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 console.log('Env check:', {
   BOT_TOKEN: process.env.BOT_TOKEN ? 'SET' : 'MISSING',
   DOMAIN: process.env.DOMAIN,
-  POSTGRES_URL: process.env.POSTGRES_URL ? 'SET' : 'MISSING',
-  POSTGRES_AUTH_TOKEN: process.env.POSTGRES_AUTH_TOKEN ? 'SET' : 'MISSING',
+  TURSO_DATABASE_URL: process.env.TURSO_DATABASE_URL ? 'SET' : 'MISSING',
+  TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN ? 'SET' : 'MISSING',
 });
 
 process.on('unhandledRejection', (r) => console.error('Unhandled rejection:', r));
